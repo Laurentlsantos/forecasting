@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>4 Support Vector Regression | Forecasting Network Data with R</title>
+  <meta name="description" content="4 Support Vector Regression | Forecasting Network Data with R">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="4 Support Vector Regression | Forecasting Network Data with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Support Vector Regression | Forecasting Network Data with R" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="seasonal-and-trend-decomposition-with-loess-forecasting-model.html">
+<link rel="next" href="artificial-neural-network.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="index.html#section"></a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#motivations"><i class="fa fa-check"></i>Motivations</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="preface.html"><a href="preface.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a><ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#network"><i class="fa fa-check"></i><b>1.2</b> Network</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#network-fundamentals"><i class="fa fa-check"></i><b>1.2.1</b> Network: fundamentals</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#road-network-and-travel-time-as-a-variable-for-transportation"><i class="fa fa-check"></i><b>1.2.2</b> Road network and travel time as a variable for transportation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#forecasting"><i class="fa fa-check"></i><b>1.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#space-time-series-forecasting"><i class="fa fa-check"></i><b>1.3.1</b> Space-time Series Forecasting</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#forecasting-models-of-spatial-network-data"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting Models of Spatial Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#forecasting-data-and-methods"><i class="fa fa-check"></i><b>1.4</b> Forecasting Data and Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#data-description"><i class="fa fa-check"></i><b>1.4.1</b> Data Description</a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#applied-methodologies"><i class="fa fa-check"></i><b>1.4.2</b> Applied Methodologies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#chapter-summary"><i class="fa fa-check"></i><b>1.5</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exploratory-spatio-temporal-data-analysis.html"><a href="exploratory-spatio-temporal-data-analysis.html"><i class="fa fa-check"></i><b>2</b> Exploratory Spatio-temporal Data Analysis</a></li>
+<li class="chapter" data-level="3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model.html"><i class="fa fa-check"></i><b>3</b> Seasonal and Trend Decomposition with Loess Forecasting Model</a><ul>
+<li class="chapter" data-level="3.1" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model.html#chapter-summary-1"><i class="fa fa-check"></i><b>3.2</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="support-vector-regression.html"><a href="support-vector-regression.html"><i class="fa fa-check"></i><b>4</b> Support Vector Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#introduction-2"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="support-vector-regression.html"><a href="support-vector-regression.html#support-vector-regression-svr"><i class="fa fa-check"></i><b>4.2</b> Support Vector Regression (SVR)</a></li>
+<li class="chapter" data-level="4.3" data-path="support-vector-regression.html"><a href="support-vector-regression.html#svr-to-predict-travel-time-for-urban-road"><i class="fa fa-check"></i><b>4.3</b> SVR to Predict Travel Time for Urban Road</a></li>
+<li class="chapter" data-level="4.4" data-path="support-vector-regression.html"><a href="support-vector-regression.html#experiment-setup"><i class="fa fa-check"></i><b>4.4</b> Experiment Setup</a></li>
+<li class="chapter" data-level="4.5" data-path="support-vector-regression.html"><a href="support-vector-regression.html#chapter-summary-2"><i class="fa fa-check"></i><b>4.5</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html"><i class="fa fa-check"></i><b>5</b> Artificial Neural Network</a><ul>
+<li class="chapter" data-level="5.1" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#introduction-3"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-3"><i class="fa fa-check"></i><b>5.2</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
+<li class="chapter" data-level="" data-path="appendix-setting-up-r.html"><a href="appendix-setting-up-r.html"><i class="fa fa-check"></i>Appendix: setting-up R</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Forecasting Network Data with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="support-vector-regression" class="section level1">
+<h1><span class="header-section-number">4</span> Support Vector Regression</h1>
+<hr />
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>In this section, the methodology <em>Support Vector Regression</em> (SVR) is applied for travel-time prediction. SVR is a computational technique that has its root on <em>machine learning</em> (ML) strategies. Machine learning uses past data to make accurate predictions of future events. Learning<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> refers to the iterative process of finding a classifier or regression algorithm with optimal solution by means of training data, and then to test simulation data under the same parameters.</p>
+<p>The focus of ML is on generalisation, the ability of the algorithm to predict unseen data samples. It stands as a different approach of classical statistics, where the focus is on in-sample performance and different to data mining which seeks to discover new knowledge from unlabelled data. ML does not assume that the functional form of the relationship between dependent and independent variables is known and can be described by model parameter.The technique minimizes error on unseen data, known as structural risk minimization, with no prior assumptions made on the probability distribution of the data.</p>
+<p>The feasibility of applying SVM in travel-time prediction is demonstrated in this section, the results and analysis are further presented.</p>
+</div>
+<div id="support-vector-regression-svr" class="section level2">
+<h2><span class="header-section-number">4.2</span> Support Vector Regression (SVR)</h2>
+<p>SVR is an extension of ML technique known as <em>support vector machine</em> (SVM), to regression problems. SVMs make use of a hypothesis space of linear functions in a feature space, trained with a learning algorithm from optimisation theory. An important aspect of SVM is that not all the available training examples are used in the training algorithm. The subset of points that lie on the margin (called support vectors) are the only ones that defines the hyperplane of maximin margin.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;myWorkSpace.RData&quot;</span>)
+knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">error =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="figure" style="text-align: center"><span id="fig:chunk-svr"></span>
+<img src="Images/SVR.png" alt="Linear support vector machine *[source: @R-burges]*." width="70%" />
+<p class="caption">
+Figure 4.1: Linear support vector machine <em><span class="citation">(source: C.J.Burges <a href="#ref-R-burges">1998</a>)</span></em>.
+</p>
+</div>
+<p>SVR has greater generalization ability and guarantee global minima for a given training data. SVMs techniques are grounded in the basic principle that for a given learning task, with a given finite number of training data, the best generalization performance will be achieved if the right balance is struck between the accuracy attained and the capacity of the machine to learn any training set without error <span class="citation">(C.J.Burges <a href="#ref-R-burges">1998</a>)</span>.</p>
+<p>Figure <a href="support-vector-regression.html#fig:chunk-svr">4.1</a> presents the classic example of linear support vector machine. SVM algorithms use a set of kernel functions. The function of kernel is to take data as input and transform it into the required form. Kernel methods in ML are used in a different way comparing to spatial analysis (e.g. Kernel Density Estimation, KDE). Instead of being applied to spatial distances, they are applied to distances between sets of variables. Different SVM algorithms use different types of kernel functions, for example linear, nonlinear, polynomial, radial basis function (RBF), and sigmoid. Figure <a href="support-vector-regression.html#fig:chunk-kernel">4.2</a> presents the basic scheme of kernel function method applied to ML.</p>
+<div class="figure" style="text-align: center"><span id="fig:chunk-kernel"></span>
+<img src="Images/kernel.png" alt="Kernel to Machine Learning *[source: @R-cheng2]*." width="85%" />
+<p class="caption">
+Figure 4.2: Kernel to Machine Learning <em><span class="citation">(source: T. Cheng <a href="#ref-R-cheng2">2019</a>)</span></em>.
+</p>
+</div>
+<p>A kernel function is usually used to refer to the <em>kernel trick</em>, a method of using a linear classifier to solve a non-linear problem. It entails transforming linearly inseparable data like to linearly separable ones. Machine learning methods are widely applied to classification and regression problems. The best-known kernel method for regression is support vector regression (SVR), which is based on the principles of <em>statistical learning theory</em> <span class="citation">(V. Vapnik <a href="#ref-R-vapnik">1995</a>)</span>. Kernel methods convert linear algorithms for use on nonlinear data by projecting the input data into a high dimensional feature space in which a linear solution is found.</p>
+</div>
+<div id="svr-to-predict-travel-time-for-urban-road" class="section level2">
+<h2><span class="header-section-number">4.3</span> SVR to Predict Travel Time for Urban Road</h2>
+<p>The idea of the regression problem is to determine a function that can approximate (i.e. predict) future values accurately. The generic SVR estimating function takes the form:</p>
+<div class="figure">
+<img src="Images/svr_eq1.png" alt="Equation: 4.1" />
+<p class="caption">Equation: 4.1</p>
+</div>
+<p>Where <span class="math inline">\(w\subset R^{n}\)</span>,<span class="math inline">\(b\subset R\)</span> and denotes a nonlinear transformation from R^{n}, to high-dimensional space. The kernel function applied to the study is the <em>Gaussian radial basis function</em> (RBF):</p>
+<div class="figure">
+<img src="Images/svr_eq2.png" alt="Equation: 4.2" />
+<p class="caption">Equation: 4.2</p>
+</div>
+<p>Where α &gt; 0 is the kernel bandwidth.</p>
+<p>SVR tries to find a function f (x) where the predicted values are at most ε from the observed values yi., i.e. they fit inside a tube of width 2ε.</p>
+<div class="figure" style="text-align: center"><span id="fig:svrtube"></span>
+<img src="Images/svr_tube.png" alt="SVR predictive function*[source: @R-wu]*." width="50%" />
+<p class="caption">
+Figure 4.3: SVR predictive function<em><span class="citation">(source: C.H. Wu <a href="#ref-R-wu">2004</a>)</span></em>.
+</p>
+</div>
+<div class="figure">
+<img src="Images/svr_eq3.png" alt="Equation: 4.3" />
+<p class="caption">Equation: 4.3</p>
+</div>
+<p>\begin{FOO}</p>
+<p>Where <span class="math inline">\(\zeta\)</span> ~i and ^* ~i are slack variables used to measure errors outside the tube. All points that lie on or outside the margin are support vectors.</p>
+<p>To train the SVR models, a better classification could be achieved by optimizing the parameters in some way. There are two parameters to train: the kernel parameter sigma and the constant c. The former is set to automatic by default. The constant C determines the amount of allowable error in the model, controlling the trade-off between model complexity and error. The value of c is not estimated and is set to 1. A large c assigns higher penalties to errors so that the regression is trained to minimize error with lower generalization, while a small assigns fewer penalties to errors. Allowing a large number of errors, the model would be less complex, thus providing higher generalization ability. On the other hand, If c is set with a high number, SVR would not allow the occurrence of any error and results would lead to a complex model. Therefore, it is worthwhile testing some values of c to see how they affect the results. Finally, epsilon determines the width of the tube.</p>
+</div>
+<div id="experiment-setup" class="section level2">
+<h2><span class="header-section-number">4.4</span> Experiment Setup</h2>
+<p>The first part of the experiment is to train the dataset. The data have been divided into training (80%) and testing (20%) data. Four road links have been aleatory chosen to train the model: IDs 2112, 2061, 473 and 2087. To strategy applied to the model training procedure is composed of 4 steps presented on Figure <a href="support-vector-regression.html#fig:chunk-procedure">4.4</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:chunk-procedure"></span>
+<img src="Images/procedure.png" alt="Model Training Procedure steps." width="100%" />
+<p class="caption">
+Figure 4.4: Model Training Procedure steps.
+</p>
+</div>
+<p>To train the data, the package called caret (short for Classification and Regression Training) has been used. The library provides a set of functions that attempt to streamline the process for creating predictive models.<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></p>
+<p><strong>Step 1: Build a time series SVR Model.</strong></p>
+<p>The first step is to rearrange the series in order to build a time series SVR model by means of a temporal autoregressive structure. The moving average uses past forecast errors to forecast future values of the series.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">load</span>(<span class="st">&quot;forecasting.RData&quot;</span>) <span class="co">#first load the data to the space environement</span>
+
+<span class="kw">library</span>(kernlab)  <span class="co"># install if necessary using &#39;install.packages&#39;</span></code></pre></div>
+<pre><code>## Warning: package &#39;kernlab&#39; was built under R version 3.5.2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(caret) <span class="co"># install if necessary using &#39;install.packages&#39;</span></code></pre></div>
+<pre><code>## Warning: package &#39;caret&#39; was built under R version 3.5.3</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: ggplot2</code></pre>
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;ggplot2&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:kernlab&#39;:
+## 
+##     alpha</code></pre>
+<p>To build the model, we will use a temporal autoregressive structure. We use <code>embed</code> function to rearrange the series. This means we will forecast the future tt at a single location (link=2112) as a function of a subset of previous tt observations.</p>
+<p>The resulting matrix can be used for one step ahead forecasting by using the first three columns as the independent variables and the fourth column as the dependent variable. In order to perform parameters tuning with k-fold cross-validation, three different embedding dimensions <em>q</em> have been applied: <em>q=3</em>: <em>q=4</em> and <em>q=5</em>.</p>
+<p>We will use the <code>embed</code> to rearrange the series in this way:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="dv">3</span> 
+data.<span class="dv">2112</span> &lt;-<span class="st"> </span><span class="kw">embed</span>(<span class="dt">x =</span> UJT [,<span class="st">&quot;2112&quot;</span>], <span class="dt">dimension =</span> m<span class="op">+</span><span class="dv">1</span>) <span class="co"># embed: function to rearrange the series</span>
+<span class="kw">colnames</span>(data.<span class="dv">2112</span>) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y_t-3&quot;</span>,<span class="st">&quot;y_t-2&quot;</span>,<span class="st">&quot;y_t-1&quot;</span>,<span class="st">&quot;y_t&quot;</span>)</code></pre></div>
+<p>The function embeds the time series x into a low-dimensional Euclidean space. This way, it is possible to forecast the future temperature as a function of a subset of previous temperature observations. Each row of the resulting matrix consists of sequences <em>x[t], x[t-1], …, x[t-dimension+1]</em>, where <em>t</em> is the original index of <em>x</em>. If <em>x</em> is a matrix, i.e., <em>x</em> contains more than one variable, then <em>x[t]</em> consists of the observation on each variable.</p>
+<p>The resulting matrix can be inspected with the funcion <code>head ()</code> which returns the first or last parts of the matrix. You will see that each row contains four observations, which are four consecutive tt observations. The first row of the matrix contains the first four observations from UJT[,“2112”] in reverse orde( e.g. column 4 is the first observation and column 1 is the 4th observation). In the second row, the first observation is removed from column 4 and the 5th observation is added to column 1. This matrix can be used for one step ahead forecasting by using the first three columns as the independent variables and the fourth column as the dependent variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span> (data.<span class="dv">2112</span>) <span class="co"># Returns the first or last parts of a vector, matrix, table, data frame or function</span></code></pre></div>
+<pre><code>##          y_t-3     y_t-2     y_t-1        y_t
+## [1,] 0.1212617 0.1152238 0.1101922 0.09610367
+## [2,] 0.1207585 0.1212617 0.1152238 0.11019217
+## [3,] 0.1061669 0.1207585 0.1212617 0.11522378
+## [4,] 0.1111985 0.1061669 0.1207585 0.12126170
+## [5,] 0.1368597 0.1111985 0.1061669 0.12075854
+## [6,] 0.1157269 0.1368597 0.1111985 0.10616689</code></pre>
+<p>The same procedure could be applied to the other dimensions <em>q=4</em> and <em>q=5</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span><span class="dv">4</span>
+data.2112_d2 &lt;-<span class="st"> </span><span class="kw">embed</span>(<span class="dt">x =</span> UJT [,<span class="st">&quot;2112&quot;</span>], <span class="dt">dimension =</span> m<span class="op">+</span><span class="dv">1</span>) 
+<span class="kw">colnames</span>(data.2112_d2) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y_t-4&quot;</span> , <span class="st">&quot;y_t-3&quot;</span>,<span class="st">&quot;y_t-2&quot;</span>,<span class="st">&quot;y_t-1&quot;</span>,<span class="st">&quot;y_t&quot;</span>)
+
+m &lt;-<span class="st"> </span><span class="dv">5</span>
+data.2112_d3 &lt;-<span class="st"> </span><span class="kw">embed</span>(<span class="dt">x =</span> UJT [,<span class="st">&quot;2112&quot;</span>], <span class="dt">dimension =</span> m<span class="op">+</span><span class="dv">1</span>) 
+<span class="kw">colnames</span>(data.2112_d3) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;y_t-5&quot;</span> , <span class="st">&quot;y_t-4&quot;</span> , <span class="st">&quot;y_t-3&quot;</span>,<span class="st">&quot;y_t-2&quot;</span>,<span class="st">&quot;y_t-1&quot;</span>,<span class="st">&quot;y_t&quot;</span>)</code></pre></div>
+<p><strong>Step 2: Divide data into training and testing sets.</strong></p>
+<p>The next step is to divide the embedded data into training and testing sets. The subset of training data is used to fit the model and the testing set to estimate model fitness. It should be noted that in temporal data there is a continuity component whereas it is important to take into account the ordering of time.</p>
+<p>That said, based on a continuous data series, the first 80% data of the months have to be selected to train the model and the remaining 20% data has been selected to test the model. Hence, the particular training set <em>S= {(Xi,yi), …,(Xi,yi)}</em> has been drawn from the distribution of the random vectors y and X.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># divide data into training and testing sets - Dimension 1</span>
+split &lt;-<span class="st"> </span><span class="dv">4143</span> <span class="co"># UJT row to separe training and testing data</span>
+yTrain &lt;-<span class="st"> </span>data.<span class="dv">2112</span> [<span class="dv">1</span><span class="op">:</span>split,<span class="dv">1</span>]
+XTrain &lt;-<span class="st"> </span>data.<span class="dv">2112</span> [<span class="dv">1</span><span class="op">:</span>split,<span class="op">-</span><span class="dv">1</span>]
+yTest &lt;-<span class="st"> </span>data.<span class="dv">2112</span> [(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(data.<span class="dv">2112</span> ),<span class="dv">1</span>]
+XTest &lt;-<span class="st"> </span>data.<span class="dv">2112</span> [(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(data.<span class="dv">2112</span> ),<span class="op">-</span><span class="dv">1</span>]
+
+<span class="co"># divide data into training and testing sets - Dimension 2</span>
+split_d2 &lt;-<span class="st"> </span><span class="dv">4143</span> <span class="co">#UJT row to separe training and testing data</span>
+yTrain_d2 &lt;-<span class="st"> </span>data.2112_d2 [<span class="dv">1</span><span class="op">:</span>split,<span class="dv">1</span>]
+XTrain_d2 &lt;-<span class="st"> </span>data.2112_d2 [<span class="dv">1</span><span class="op">:</span>split,<span class="op">-</span><span class="dv">1</span>]
+yTest_d2 &lt;-<span class="st"> </span>data.2112_d2 [(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(data.2112_d2 ),<span class="dv">1</span>]
+XTest_d2 &lt;-<span class="st"> </span>data.2112_d2 [(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(data.2112_d2 ),<span class="op">-</span><span class="dv">1</span>]
+
+<span class="co"># divide data into training and testing sets - Dimension 3</span>
+split_d3 &lt;-<span class="st"> </span><span class="dv">4143</span> <span class="co"># UJT row to separe training and testing data</span>
+yTrain_d3 &lt;-<span class="st"> </span>data.2112_d3 [<span class="dv">1</span><span class="op">:</span>split,<span class="dv">1</span>]
+XTrain_d3 &lt;-<span class="st"> </span>data.2112_d3 [<span class="dv">1</span><span class="op">:</span>split,<span class="op">-</span><span class="dv">1</span>]
+yTest_d3 &lt;-<span class="st"> </span>data.2112_d3 [(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(data.2112_d3 ),<span class="dv">1</span>]
+XTest_d3 &lt;-<span class="st"> </span>data.2112_d3 [(split<span class="op">+</span><span class="dv">1</span>)<span class="op">:</span><span class="kw">nrow</span>(data.2112_d3 ),<span class="op">-</span><span class="dv">1</span>]</code></pre></div>
+<p><strong>Step 3. Perform parameters tuning with k-fold cross validation.</strong></p>
+<p>To determine the values of the tuning parameters, one approach is to use a <em>resampling</em> to estimate how well the model performs on the training set. There are different types of resampling methods, being <em>k-fold cross-validation</em> one of the most common types<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>. The process must be repeated many times and the performance estimates from each holdout set are averaged into a final overall estimate of model efficacy such that given the training set, the algorithm produces a prediction function <em>f(x)= Փ(xi)</em>. For each parameter combination the model fitness is estimated via resampling and the relationship between the tuning parameters and the model performance is evaluated.</p>
+<p>The <em>k-fold cross-validation</em> has been applied as resampling method, with k set to 5. In k-fold cross validation, the data are randomly partitioned into <em>k-folds</em>. Each fold is left out in turn and the remaining <em>k-1</em> folds are used to train a model and predict its values. The selected model is the one with the best average performance across the k folds<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a>. The procedure prevents overfitting to a subset of the training data.</p>
+<p>The <code>caret()</code> package is used to perform the cross validation with a radial basis function kernel applied for parameter tuning. There are two tuning parameters: the radial basis function scale parameter bandwidth <em>α</em>, and the cost value associated with support vectors. To train the model we will use k-fold cross validation, with k set to 5.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#To train the model we will use k-fold cross validation, with k set to 5</span>
+ctrl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="dt">method =</span> <span class="st">&quot;cv&quot;</span>, <span class="dt">number=</span><span class="dv">5</span>) </code></pre></div>
+<p>To test (at present, caret only allows sigma and C to be trained in this way so we cannot optimise over epsilon automatically) and train the model, a grid of parameters must be created.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a grid of parameters to test and train the model with dimension 1</span>
+SVRGridCoarse &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.sigma=</span><span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>), <span class="dt">.C=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>))
+SVRFitCoarse &lt;-<span class="st"> </span><span class="kw">train</span>(XTrain, yTrain, <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, <span class="dt">tuneGrid=</span>SVRGridCoarse, <span class="dt">trControl=</span>ctrl, <span class="dt">type=</span><span class="st">&quot;eps-svr&quot;</span>)
+
+SVRFitCoarse <span class="co">#parameters</span></code></pre></div>
+<pre><code>## Support Vector Machines with Radial Basis Function Kernel 
+## 
+## 4143 samples
+##    3 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 3313, 3316, 3314, 3314, 3315 
+## Resampling results across tuning parameters:
+## 
+##   sigma  C     RMSE        Rsquared   MAE       
+##   0.001    10  0.01856390  0.7449754  0.01396254
+##   0.001   100  0.01838648  0.7499501  0.01383970
+##   0.001  1000  0.01831382  0.7518320  0.01375145
+##   0.010    10  0.01833364  0.7513945  0.01377507
+##   0.010   100  0.01836181  0.7505891  0.01377618
+##   0.010  1000  0.01838592  0.7498638  0.01379780
+##   0.100    10  0.01843801  0.7485884  0.01380886
+##   0.100   100  0.01902256  0.7327731  0.01396250
+##   0.100  1000  0.02159954  0.6691090  0.01421513
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final values used for the model were sigma = 0.001 and C = 1000.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SVRFitCoarse)</code></pre></div>
+<p><img src="Images/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Results are given for each of the parameter combinations in terms of the root mean squared error (RMSE), R squared and Mean Absolute Error (MAE). The results are displayed using the plot function.</p>
+<p>To test the best performance, we might differentiate the values of the embedding dimension with the three different autoregressive orders have been used: <em>q=3</em>; <em>q=4</em> and <em>q=3</em>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a grid of parameters to test and train the model with dimension 2</span>
+SVRGridCoarse_d2 &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.sigma=</span><span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>), <span class="dt">.C=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>))
+SVRFitCoarse_d2 &lt;-<span class="st"> </span><span class="kw">train</span>(XTrain_d2, yTrain_d2, <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, <span class="dt">tuneGrid=</span>SVRGridCoarse, <span class="dt">trControl=</span>ctrl, <span class="dt">type=</span><span class="st">&quot;eps-svr&quot;</span>)
+SVRFitCoarse_d2</code></pre></div>
+<pre><code>## Support Vector Machines with Radial Basis Function Kernel 
+## 
+## 4143 samples
+##    4 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 3314, 3315, 3314, 3315, 3314 
+## Resampling results across tuning parameters:
+## 
+##   sigma  C     RMSE        Rsquared   MAE       
+##   0.001    10  0.01841016  0.7479903  0.01380522
+##   0.001   100  0.01819170  0.7540499  0.01365956
+##   0.001  1000  0.01813995  0.7553125  0.01359487
+##   0.010    10  0.01816902  0.7545156  0.01362127
+##   0.010   100  0.01820220  0.7536119  0.01363948
+##   0.010  1000  0.01832990  0.7501041  0.01370825
+##   0.100    10  0.01849891  0.7456712  0.01378984
+##   0.100   100  0.01895304  0.7329096  0.01396627
+##   0.100  1000  0.02114658  0.6748830  0.01443227
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final values used for the model were sigma = 0.001 and C = 1000.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a grid of parameters to test and train the modelwith dimension 3</span>
+SVRGridCoarse_d3 &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.sigma=</span><span class="kw">c</span>(<span class="fl">0.001</span>, <span class="fl">0.01</span>, <span class="fl">0.1</span>), <span class="dt">.C=</span><span class="kw">c</span>(<span class="dv">10</span>,<span class="dv">100</span>,<span class="dv">1000</span>))
+SVRFitCoarse_d3 &lt;-<span class="st"> </span><span class="kw">train</span>(XTrain_d3, yTrain_d3, <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, <span class="dt">tuneGrid=</span>SVRGridCoarse, <span class="dt">trControl=</span>ctrl, <span class="dt">type=</span><span class="st">&quot;eps-svr&quot;</span>)
+SVRFitCoarse_d3</code></pre></div>
+<pre><code>## Support Vector Machines with Radial Basis Function Kernel 
+## 
+## 4143 samples
+##    5 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 3313, 3316, 3315, 3312, 3316 
+## Resampling results across tuning parameters:
+## 
+##   sigma  C     RMSE        Rsquared   MAE       
+##   0.001    10  0.01837965  0.7497511  0.01377965
+##   0.001   100  0.01817232  0.7554023  0.01361674
+##   0.001  1000  0.01816241  0.7555760  0.01358992
+##   0.010    10  0.01821301  0.7541727  0.01361714
+##   0.010   100  0.01822627  0.7536928  0.01364347
+##   0.010  1000  0.01828293  0.7523292  0.01369578
+##   0.100    10  0.01851410  0.7465000  0.01382016
+##   0.100   100  0.01917074  0.7290892  0.01407848
+##   0.100  1000  0.02148901  0.6681348  0.01477005
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final values used for the model were sigma = 0.001 and C = 1000.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SVRFitCoarse_d2)
+<span class="kw">ggplot</span>(SVRFitCoarse_d3)</code></pre></div>
+<p><img src="Images/chunk-grid-1.png" width="672" /><img src="Images/chunk-grid-2.png" width="672" /></p>
+<p>For all dimensions, <code>sigma = 0.001</code> and <code>C = 1000</code> present the best outome, whereas <em>q = 4</em> provides the best fit with <code>RMSE = 0.01813995</code>. However, it should be noted that smaller value of sigma could produce a better result.</p>
+<p>We may achieve a better classification if we try to optimise the parameters in some way. There are two parameters to train: the kernel parameter <code>sigma</code> and the constant <code>C</code>. <code>Sigma</code> is set <code>automatic</code> by default. The value of <code>C</code> is not estimated and is arbitrary set to a. Therefore, its is important to test some more values for <code>C</code>.</p>
+<p>We can refine the grid to see if we can gain further improvements in performance.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Testing the grid to see if we can gain further improvements in performance: diferent sigma for d1</span>
+SVRGridFine &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.sigma=</span><span class="kw">c</span>(<span class="fl">0.005</span>, <span class="fl">0.05</span>, <span class="fl">0.5</span>), <span class="dt">.C=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">50</span>,<span class="dv">500</span>))
+<span class="kw">system.time</span>(SVRFitFine &lt;-<span class="st"> </span><span class="kw">train</span>(XTrain, yTrain, <span class="dt">method=</span><span class="st">&quot;svmRadial&quot;</span>, <span class="dt">tuneGrid=</span>SVRGridFine, 
+                                <span class="dt">trControl=</span>ctrl, <span class="dt">type=</span><span class="st">&quot;eps-svr&quot;</span>))</code></pre></div>
+<pre><code>##    user  system elapsed 
+##  224.39    3.66  228.55</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SVRFitFine)
+SVRFitFine</code></pre></div>
+<pre><code>## Support Vector Machines with Radial Basis Function Kernel 
+## 
+## 4143 samples
+##    3 predictor
+## 
+## No pre-processing
+## Resampling: Cross-Validated (5 fold) 
+## Summary of sample sizes: 3314, 3314, 3315, 3314, 3315 
+## Resampling results across tuning parameters:
+## 
+##   sigma  C    RMSE        Rsquared   MAE       
+##   0.005    5  0.01841781  0.7489890  0.01384557
+##   0.005   50  0.01833345  0.7514718  0.01375022
+##   0.005  500  0.01837675  0.7503472  0.01376189
+##   0.050    5  0.01838661  0.7502076  0.01377543
+##   0.050   50  0.01851660  0.7463932  0.01382779
+##   0.050  500  0.01920488  0.7282400  0.01394578
+##   0.500    5  0.01889770  0.7358994  0.01399329
+##   0.500   50  0.01980952  0.7102757  0.01433585
+##   0.500  500  0.02209354  0.6490682  0.01493123
+## 
+## RMSE was used to select the optimal model using the smallest value.
+## The final values used for the model were sigma = 0.005 and C = 50.</code></pre>
+<p><img src="Images/unnamed-chunk-7-1.png" width="672" /></p>
+<p>```</p>
+<p><strong>Step 4: Select the model and apply predictive analysis.</strong></p>
+<p>The effectiveness of a model is commonly measured using a single statistic. For models predicting a numeric outcome, the fitness statistic might be the root mean squared error (RMSE) or the coefficient of determination (R2). For classification, where a discrete outcome is being predicted, the error rate might be an appropriate measure.</p>
+<p>Examining and considering the RMSE index, the best performance can be pointed out for the road link. The model object for the best model is presented on figure 7.</p>
+<p>The model for one-step-ahead prediction can be used to plot the results (figure 8). The model forecasts the TTs reasonably well. For road link 2112, the proportion of points used as support vector has been of 62% from the dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can use the model for one-step-ahead prediction and plot the results</span>
+yPred &lt;-<span class="st"> </span><span class="kw">predict</span>(SVRFitCoarse_d2, XTest_d2)
+<span class="kw">plot</span>(yTest_d2, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">xaxt=</span><span class="st">&quot;n&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Observations&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;TTs&quot;</span>)
+<span class="kw">points</span>(yPred, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;blue&quot;</span>)
+<span class="co">#axis(1, at=seq(90, (180*5)+90, 180), labels=unique(dates[(split+1):nrow(data),1]))</span>
+<span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,
+<span class="st">&quot;Observed&quot;</span>, <span class="st">&quot;Observed and Predicted&quot;</span>)</code></pre></div>
+<p><img src="Images/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Finally, it is also important to check whether any temporal autocorrelation remains in the residuals of the model.</p>
+<p>Figures 10 displays differenced ACF plot for the data of the series. The dashed lines are approximate 95% confident interval for the autocorrelation. Even though no significant overall autocorrelation is presented, it can be noted a higher autocorrelation up to lag 5. Additionally, no seasonal pattern could be noted.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Check whether any temporal autocorrelation remains in the residuals of the model:</span>
+SVRResidual &lt;-<span class="st"> </span>yTest_d2<span class="op">-</span>yPred
+<span class="kw">plot</span>(SVRResidual)
+
+<span class="kw">acf</span>(SVRResidual)</code></pre></div>
+<p><img src="Images/grid10-1.png" width="672" /><img src="Images/grid10-2.png" width="672" /></p>
+</div>
+<div id="chapter-summary-2" class="section level2">
+<h2><span class="header-section-number">4.5</span> Chapter Summary</h2>
+<p>The basic idea behind the development of SVMs is the same: for a given learning task, with a given finite number of training data, the best generalization performance will be achieved if the right balance is struck between the accuracy attained on that particular training set, and the ability of the algorithm to predict unseen data samples with a minimum of errors.</p>
+<p>Finally, it is worth mentioning that the experiment applies time series only. It is possible to create a space-time model using the spatial weight matrix but since the spatio-temporal autocorrelation is weaker than the temporal autocorrelation (as previously discussed on the study), the model has not been applied.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-burges">
+<p>C.J.Burges. 1998. “A Tutorial on Support Vector Machines for Pattern Recognition.” <em>Data Mining and Knowledge Discovery</em> 2: 121–67.</p>
+</div>
+<div id="ref-R-cheng2">
+<p>T. Cheng, J.Haworth. 2019. “Satio-Temporal Data Analysis and Big Data Mining.” <em>University College London</em>.</p>
+</div>
+<div id="ref-R-vapnik">
+<p>V. Vapnik, C. Cortes &amp;. 1995. “Support-Vector Networks.” <em>Machine Learning</em> 20: 273–97.</p>
+</div>
+<div id="ref-R-wu">
+<p>C.H. Wu, J.M. Ho &amp; D.T.Lee. 2004. “Travel-Time Prediction with Support Vector Regression.” <em>IEEE Transactions on Intelligent Transportation Systems</em> 4: 276–81.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="3">
+<li id="fn3"><p>Learning machine is just another name for a family of functions <em>f(x,α)</em>.<a href="support-vector-regression.html#fnref3">↩</a></p></li>
+<li id="fn4"><p>For more information, see <a href="http://topepo.github.io/caret/index.html" class="uri">http://topepo.github.io/caret/index.html</a><a href="support-vector-regression.html#fnref4">↩</a></p></li>
+<li id="fn5"><p>Other common resampling methods are leave-one-out cross-validation, Monte Carlo cross-validation and the bootstrap<a href="support-vector-regression.html#fnref5">↩</a></p></li>
+<li id="fn6"><p>the optimal model is selected based on accuracy statistics<a href="support-vector-regression.html#fnref6">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="seasonal-and-trend-decomposition-with-loess-forecasting-model.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="artificial-neural-network.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

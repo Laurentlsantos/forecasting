@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:title" content="4.2 Support Vector Regression (SVR) | Forecasting Network Data with R" />
+<meta property="og:type" content="book" />
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+});
+</script>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+
+<meta name="description" content="4.2 Support Vector Regression (SVR) | Forecasting Network Data with R">
+
+<title>4.2 Support Vector Regression (SVR) | Forecasting Network Data with R</title>
+
+<script src="libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="libs/bootstrap-3.3.5/css/cerulean.min.css" rel="stylesheet" />
+<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container-fluid main-container">
+
+
+<div class="row">
+<div class="col-sm-12">
+<div id="TOC">
+<ul>
+<li class="has-sub"><a href="index.html#preface">Preface</a><ul>
+<li><a href="motivations.html#motivations">Motivations</a></li>
+<li><a href="prerequisites.html#prerequisites">Prerequisites</a></li>
+<li><a href="conventions.html#conventions">Conventions</a></li>
+<li><a href="acknowledgements.html#acknowledgements">Acknowledgements</a></li>
+<li><a href="about-the-authors.html#about-the-authors">About the Authors</a></li>
+</ul></li>
+<li class="has-sub"><a href="1-getting-started.html#getting-started"><span class="toc-section-number">1</span> Getting Started</a><ul>
+<li><a href="1-1-introduction.html#introduction"><span class="toc-section-number">1.1</span> Introduction</a></li>
+<li class="has-sub"><a href="1-2-network.html#network"><span class="toc-section-number">1.2</span> Network</a><ul>
+<li><a href="1-2-network.html#network-fundamentals"><span class="toc-section-number">1.2.1</span> Network: fundamentals</a></li>
+<li><a href="1-2-network.html#road-network-and-travel-time-as-a-variable-for-transportation"><span class="toc-section-number">1.2.2</span> Road network and travel time as a variable for transportation</a></li>
+</ul></li>
+<li class="has-sub"><a href="1-3-forecasting.html#forecasting"><span class="toc-section-number">1.3</span> Forecasting</a><ul>
+<li><a href="1-3-forecasting.html#space-time-series-forecasting"><span class="toc-section-number">1.3.1</span> Space-time Series Forecasting</a></li>
+<li><a href="1-3-forecasting.html#forecasting-models-of-spatial-network-data"><span class="toc-section-number">1.3.2</span> Forecasting Models of Spatial Network Data</a></li>
+</ul></li>
+<li class="has-sub"><a href="1-4-forecasting-data-and-methods.html#forecasting-data-and-methods"><span class="toc-section-number">1.4</span> Forecasting Data and Methods</a><ul>
+<li><a href="1-4-forecasting-data-and-methods.html#data-description"><span class="toc-section-number">1.4.1</span> Data Description</a></li>
+<li><a href="1-4-forecasting-data-and-methods.html#applied-methodologies"><span class="toc-section-number">1.4.2</span> Applied Methodologies</a></li>
+</ul></li>
+<li><a href="1-5-chapter-summary.html#chapter-summary"><span class="toc-section-number">1.5</span> Chapter Summary</a></li>
+</ul></li>
+<li><a href="2-exploratory-spatio-temporal-data-analysis.html#exploratory-spatio-temporal-data-analysis"><span class="toc-section-number">2</span> Exploratory Spatio-temporal Data Analysis</a></li>
+<li class="has-sub"><a href="3-seasonal-and-trend-decomposition-with-loess-forecasting-model.html#seasonal-and-trend-decomposition-with-loess-forecasting-model"><span class="toc-section-number">3</span> Seasonal and Trend Decomposition with Loess Forecasting Model</a><ul>
+<li><a href="3-1-introduction-1.html#introduction-1"><span class="toc-section-number">3.1</span> Introduction</a></li>
+<li><a href="3-2-chapter-summary-1.html#chapter-summary-1"><span class="toc-section-number">3.2</span> Chapter Summary</a></li>
+</ul></li>
+<li class="has-sub"><a href="4-support-vector-regression.html#support-vector-regression"><span class="toc-section-number">4</span> Support Vector Regression</a><ul>
+<li><a href="4-1-introduction-2.html#introduction-2"><span class="toc-section-number">4.1</span> Introduction</a></li>
+<li><a href="4-2-support-vector-regression-svr.html#support-vector-regression-svr"><span class="toc-section-number">4.2</span> Support Vector Regression (SVR)</a></li>
+<li><a href="4-3-svr-to-predict-travel-time-for-urban-road.html#svr-to-predict-travel-time-for-urban-road"><span class="toc-section-number">4.3</span> SVR to Predict Travel Time for Urban Road</a></li>
+<li><a href="4-4-experiment-setup.html#experiment-setup"><span class="toc-section-number">4.4</span> Experiment Setup</a></li>
+<li><a href="4-5-chapter-summary-2.html#chapter-summary-2"><span class="toc-section-number">4.5</span> Chapter Summary</a></li>
+</ul></li>
+<li class="has-sub"><a href="5-artificial-neural-network.html#artificial-neural-network"><span class="toc-section-number">5</span> Artificial Neural Network</a><ul>
+<li><a href="5-1-introduction-3.html#introduction-3"><span class="toc-section-number">5.1</span> Introduction</a></li>
+<li><a href="5-2-chapter-summary-3.html#chapter-summary-3"><span class="toc-section-number">5.2</span> Chapter Summary</a></li>
+</ul></li>
+<li><a href="6-summing-up.html#summing-up"><span class="toc-section-number">6</span> Summing-up</a></li>
+<li><a href="appendix-setting-up-r.html#appendix-setting-up-r">Appendix: setting-up R</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-sm-12">
+<div id="support-vector-regression-svr" class="section level2">
+<h2><span class="header-section-number">4.2</span> Support Vector Regression (SVR)</h2>
+<p>SVR is an extension of ML technique known as <em>support vector machine</em> (SVM), to regression problems. SVMs make use of a hypothesis space of linear functions in a feature space, trained with a learning algorithm from optimisation theory. An important aspect of SVM is that not all the available training examples are used in the training algorithm. The subset of points that lie on the margin (called support vectors) are the only ones that defines the hyperplane of maximin margin.</p>
+<div class="figure"><span id="fig:chunk-svr"></span>
+<img src="Images/SVR.png" alt="Linear support vector machine *[source: @R-burges]*." width="341" />
+<p class="caption">
+Figure 4.1: Linear support vector machine <em><span class="citation">(source: C.J.Burges <a href="#ref-R-burges">1998</a>)</span></em>.
+</p>
+</div>
+<p>SVR has greater generalization ability and guarantee global minima for a given training data. SVMs techniques are grounded in the basic principle that for a given learning task, with a given finite number of training data, the best generalization performance will be achieved if the right balance is struck between the accuracy attained and the capacity of the machine to learn any training set without error <span class="citation">(C.J.Burges <a href="#ref-R-burges">1998</a>)</span>.</p>
+<p>Figure <a href="4-2-support-vector-regression-svr.html#fig:chunk-svr">4.1</a> presents the classic example of linear support vector machine. SVM algorithms use a set of kernel functions. The function of kernel is to take data as input and transform it into the required form. Kernel methods in ML are used in a different way comparing to spatial analysis (e.g. Kernel Density Estimation, KDE). Instead of being applied to spatial distances, they are applied to distances between sets of variables. Different SVM algorithms use different types of kernel functions, for example linear, nonlinear, polynomial, radial basis function (RBF), and sigmoid. Figure <a href="4-2-support-vector-regression-svr.html#fig:chunk-kernel">4.2</a> presents the basic scheme of kernel function method applied to ML.</p>
+<div class="figure"><span id="fig:chunk-kernel"></span>
+<img src="Images/kernel.png" alt="Kernel to Machine Learning *[source: @R-cheng2]*." width="555" />
+<p class="caption">
+Figure 4.2: Kernel to Machine Learning <em><span class="citation">(source: T. Cheng <a href="#ref-R-cheng2">2019</a>)</span></em>.
+</p>
+</div>
+<p>A kernel function is usually used to refer to the <em>kernel trick</em>, a method of using a linear classifier to solve a non-linear problem. It entails transforming linearly inseparable data like to linearly separable ones. Machine learning methods are widely applied to classification and regression problems. The best-known kernel method for regression is support vector regression (SVR), which is based on the principles of <em>statistical learning theory</em> <span class="citation">(V. Vapnik <a href="#ref-R-vapnik">1995</a>)</span>. Kernel methods convert linear algorithms for use on nonlinear data by projecting the input data into a high dimensional feature space in which a linear solution is found.</p>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-burges">
+<p>C.J.Burges. 1998. “A Tutorial on Support Vector Machines for Pattern Recognition.” <em>Data Mining and Knowledge Discovery</em> 2: 121–67.</p>
+</div>
+<div id="ref-R-cheng2">
+<p>T. Cheng, J.Haworth. 2019. “Satio-Temporal Data Analysis and Big Data Mining.” <em>University College London</em>.</p>
+</div>
+<div id="ref-R-vapnik">
+<p>V. Vapnik, C. Cortes &amp;. 1995. “Support-Vector Networks.” <em>Machine Learning</em> 20: 273–97.</p>
+</div>
+</div>
+<p style="text-align: center;">
+<a href="4-1-introduction-2.html"><button class="btn btn-default">Previous</button></a>
+<a href="4-3-svr-to-predict-travel-time-for-urban-road.html"><button class="btn btn-default">Next</button></a>
+</p>
+</div>
+</div>
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+$(document).ready(function () {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+});
+
+</script>
+
+</body>
+</html>
