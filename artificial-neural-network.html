@@ -278,7 +278,7 @@ fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<s
 nnet.parameters  &lt;-<span class="st"> </span><span class="kw">train</span>(training[<span class="dv">1</span><span class="op">:</span><span class="dv">4139</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>], training_<span class="dv">1</span>[,<span class="dv">14</span>], <span class="dt">method =</span> <span class="st">&quot;nnet&quot;</span>, <span class="dt">metric =</span> <span class="st">&quot;log&quot;</span>, <span class="dt">trControl =</span> fitControl, <span class="dt">tuneGrid=</span>mygrid)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(nnet.parameters)</code></pre></div>
 <div class="figure"><span id="fig:graph1"></span>
-<img src="_main_files/figure-html/graph1-1.png" alt="RMSE error in the traing data simulation using different size and decay parameters." width="672" />
+<img src="Images/graph1-1.png" alt="RMSE error in the traing data simulation using different size and decay parameters." width="672" />
 <p class="caption">
 Figure 5.5: RMSE error in the traing data simulation using different size and decay parameters.
 </p>
@@ -288,7 +288,7 @@ Figure 5.5: RMSE error in the traing data simulation using different size and de
 <p>Once the prediction for all the road links has been carried on, we must validate the model by assessing the observed results with the predicted ones. This is done comparing the mean absolute percent error (MAPE) and the mean square error (MSE) index generated between the predict values and observed values (Table XXXX).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot.nnet</span>(nnet.parameters<span class="op">$</span>finalModel)</code></pre></div>
 <div class="figure"><span id="fig:graph2"></span>
-<img src="_main_files/figure-html/graph2-1.png" alt="Internal structure of the ANN using the best-tuned parameters." width="672" />
+<img src="Images/graph2-1.png" alt="Internal structure of the ANN using the best-tuned parameters." width="672" />
 <p class="caption">
 Figure 5.6: Internal structure of the ANN using the best-tuned parameters.
 </p>
@@ -304,7 +304,7 @@ temp.pred&lt;-<span class="kw">predict</span>(temp.nnet, testing)</code></pre></
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matplot</span>(<span class="kw">cbind</span>(testing[,<span class="dv">1</span>], temp.pred[,<span class="dv">1</span>]),<span class="dt">ylab=</span><span class="st">&quot;UTT&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Lags&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Road link 2087&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))
 <span class="kw">legend</span>(<span class="dv">1</span>,.<span class="dv">35</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Test&quot;</span>,<span class="st">&quot;Prediction&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dt">box.lwd =</span> .<span class="dv">5</span>, <span class="dt">cex =</span> .<span class="dv">65</span> )</code></pre></div>
 <div class="figure"><span id="fig:result"></span>
-<img src="_main_files/figure-html/result-1.png" alt="Observed versus forecast values for road link 2087 for 5-minute interval." width="672" />
+<img src="Images/result-1.png" alt="Observed versus forecast values for road link 2087 for 5-minute interval." width="672" />
 <p class="caption">
 Figure 5.7: Observed versus forecast values for road link 2087 for 5-minute interval.
 </p>
