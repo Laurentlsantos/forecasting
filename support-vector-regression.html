@@ -364,7 +364,7 @@ SVRFitCoarse </code></pre></div>
 <p>Results are given for each of the parameter combinations in terms of the root mean squared error (RMSE), R squared and Mean Absolute Error (MAE). We can view the results visually using the <code>ggplot()</code> function, as displayed in figure <a href="support-vector-regression.html#fig:trainingerrors">4.5</a>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SVRFitCoarse)</code></pre></div>
 <div class="figure"><span id="fig:trainingerrors"></span>
-<img src="_main_files/figure-html/trainingerrors-1.png" alt="Training errors for the SVR model with different parameter combinations" width="672" />
+<img src="Images/trainingerrors-1.png" alt="Training errors for the SVR model with different parameter combinations" width="672" />
 <p class="caption">
 Figure 4.5: Training errors for the SVR model with different parameter combinations
 </p>
@@ -429,7 +429,7 @@ SVRFitCoarse_d3</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(SVRFitCoarse_d2)
 <span class="kw">ggplot</span>(SVRFitCoarse_d3)</code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-20"></span>
-<img src="_main_files/figure-html/unnamed-chunk-20-1.png" alt="Training errors for the SVR model with different parameter combinations" width="672" /><img src="_main_files/figure-html/unnamed-chunk-20-2.png" alt="Training errors for the SVR model with different parameter combinations" width="672" />
+<img src="Images/unnamed-chunk-20-1.png" alt="Training errors for the SVR model with different parameter combinations" width="672" /><img src="Images/unnamed-chunk-20-2.png" alt="Training errors for the SVR model with different parameter combinations" width="672" />
 <p class="caption">
 Figure 4.6: Training errors for the SVR model with different parameter combinations
 </p>
@@ -471,7 +471,7 @@ SVRFitFine</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># plot the results</span>
 <span class="kw">ggplot</span>(SVRFitFine)</code></pre></div>
 <div class="figure"><span id="fig:unnamed-chunk-22"></span>
-<img src="_main_files/figure-html/unnamed-chunk-22-1.png" alt="Training errors for the SVR model with different parameter combinations" width="672" />
+<img src="Images/unnamed-chunk-22-1.png" alt="Training errors for the SVR model with different parameter combinations" width="672" />
 <p class="caption">
 Figure 4.7: Training errors for the SVR model with different parameter combinations
 </p>
@@ -501,7 +501,7 @@ yPred &lt;-<span class="st"> </span><span class="kw">predict</span>(SVRFitCoarse
 <span class="kw">points</span>(yPred, <span class="dt">col=</span><span class="st">&quot;blue&quot;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&quot;blue&quot;</span>)
 <span class="co">#axis(1, at=seq(90, (180*5)+90, 180), labels=unique(dates[(split+1):nrow(data),1]))</span></code></pre></div>
 <div class="figure"><span id="fig:prediction"></span>
-<img src="_main_files/figure-html/prediction-1.png" alt="Observed vs predicted TT using an SVR model" width="672" />
+<img src="Images/prediction-1.png" alt="Observed vs predicted TT using an SVR model" width="672" />
 <p class="caption">
 Figure 4.8: Observed vs predicted TT using an SVR model
 </p>
@@ -512,7 +512,7 @@ Figure 4.8: Observed vs predicted TT using an SVR model
 SVRResidual &lt;-<span class="st"> </span>yTest_d2<span class="op">-</span>yPred
 <span class="kw">plot</span>(SVRResidual)</code></pre></div>
 <div class="figure"><span id="fig:grid9"></span>
-<img src="_main_files/figure-html/grid9-1.png" alt="Residual autocorrelation for SVR model" width="672" />
+<img src="Images/grid9-1.png" alt="Residual autocorrelation for SVR model" width="672" />
 <p class="caption">
 Figure 4.9: Residual autocorrelation for SVR model
 </p>
@@ -521,7 +521,7 @@ Figure 4.9: Residual autocorrelation for SVR model
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To produce an autocorrelation plot</span>
 <span class="kw">acf</span>(SVRResidual)</code></pre></div>
 <div class="figure"><span id="fig:grid10"></span>
-<img src="_main_files/figure-html/grid10-1.png" alt="Residual autocorrelation for SVR model" width="672" />
+<img src="Images/grid10-1.png" alt="Residual autocorrelation for SVR model" width="672" />
 <p class="caption">
 Figure 4.10: Residual autocorrelation for SVR model
 </p>
