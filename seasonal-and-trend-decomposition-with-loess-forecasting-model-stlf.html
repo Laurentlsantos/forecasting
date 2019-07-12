@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>3 Seasonal and Trend Decomposition with Loess Forecasting Model (STLF) | Introduction to Spatial Network Forecast with R</title>
+  <meta name="description" content="3 Seasonal and Trend Decomposition with Loess Forecasting Model (STLF) | Introduction to Spatial Network Forecast with R" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="3 Seasonal and Trend Decomposition with Loess Forecasting Model (STLF) | Introduction to Spatial Network Forecast with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="3 Seasonal and Trend Decomposition with Loess Forecasting Model (STLF) | Introduction to Spatial Network Forecast with R" />
+  
+  
+  
+
+<meta name="author" content="Laurent Lacaze Santos &amp; Francisco Salgado Castillo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-spatio-temporal-data-analysis-and-visualisation.html">
+<link rel="next" href="support-vector-regression.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivations-and-approach"><i class="fa fa-check"></i>Motivations and Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#online-version"><i class="fa fa-check"></i>Online Version</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a><ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#network"><i class="fa fa-check"></i><b>1.2</b> Network</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#network-fundamentals"><i class="fa fa-check"></i><b>1.2.1</b> Network: fundamentals</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#road-network-and-travel-time-as-a-variable-for-transportation"><i class="fa fa-check"></i><b>1.2.2</b> Road Network and Travel Time as a Variable for Transportation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#forecasting"><i class="fa fa-check"></i><b>1.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#space-time-series-forecasting"><i class="fa fa-check"></i><b>1.3.1</b> Space-time Series Forecasting</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#forecasting-models-of-spatial-network-data"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting Models of Spatial Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#forecasting-data-and-methods"><i class="fa fa-check"></i><b>1.4</b> Forecasting Data and Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#data-description"><i class="fa fa-check"></i><b>1.4.1</b> Data Description</a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#applied-methodologies"><i class="fa fa-check"></i><b>1.4.2</b> Applied Methodologies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#chapter-summary"><i class="fa fa-check"></i><b>1.5</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><i class="fa fa-check"></i><b>2</b> Exploratory Spatio-temporal Data Analysis and Visualisation</a><ul>
+<li class="chapter" data-level="2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#examining-data-patterns-and-characteristics"><i class="fa fa-check"></i><b>2.2</b> Examining Data Patterns and Characteristics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#non-spatio-temporal-data-patterns"><i class="fa fa-check"></i><b>2.2.1</b> Non Spatio-temporal Data Patterns</a></li>
+<li class="chapter" data-level="2.2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-patterns"><i class="fa fa-check"></i><b>2.2.2</b> Temporal Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#spatio-temporal-dependence-and-autocorrelation"><i class="fa fa-check"></i><b>2.3</b> Spatio-temporal Dependence and Autocorrelation</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-autocorrelation"><i class="fa fa-check"></i><b>2.3.1</b> Temporal autocorrelation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#chapter-summary-1"><i class="fa fa-check"></i><b>2.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><i class="fa fa-check"></i><b>3</b> Seasonal and Trend Decomposition with Loess Forecasting Model (STLF)</a><ul>
+<li class="chapter" data-level="3.1" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#method-description"><i class="fa fa-check"></i><b>3.2</b> Method Description</a></li>
+<li class="chapter" data-level="3.3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#the-modeling-and-solving-approach"><i class="fa fa-check"></i><b>3.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="3.4" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#chapter-summary-2"><i class="fa fa-check"></i><b>3.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="support-vector-regression.html"><a href="support-vector-regression.html"><i class="fa fa-check"></i><b>4</b> Support Vector Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="support-vector-regression.html"><a href="support-vector-regression.html#method-description-1"><i class="fa fa-check"></i><b>4.2</b> Method Description</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#svr-to-predict-travel-time-for-urban-road"><i class="fa fa-check"></i><b>4.2.1</b> SVR to Predict Travel Time for Urban Road</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="support-vector-regression.html"><a href="support-vector-regression.html#the-modeling-and-solving-approach-1"><i class="fa fa-check"></i><b>4.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="4.4" data-path="support-vector-regression.html"><a href="support-vector-regression.html#chapter-summary-3"><i class="fa fa-check"></i><b>4.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html"><i class="fa fa-check"></i><b>5</b> Artificial Neural Network</a><ul>
+<li class="chapter" data-level="5.1" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#method-description-2"><i class="fa fa-check"></i><b>5.2</b> Method Description</a></li>
+<li class="chapter" data-level="5.3" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#the-modeling-and-solving-approach-2"><i class="fa fa-check"></i><b>5.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="5.4" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-4"><i class="fa fa-check"></i><b>5.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#a-setting-up-r"><i class="fa fa-check"></i>A Setting-up R</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#b-data-set"><i class="fa fa-check"></i>B Data set</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Spatial Network Forecast with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf" class="section level1">
+<h1><span class="header-section-number">3</span> Seasonal and Trend Decomposition with Loess Forecasting Model (STLF)</h1>
+<hr />
+<div id="introduction-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> Introduction</h2>
+<p>In Chapter 2, we see that <em>parametric models</em> describe the functional form of the relationship between the dependent and independent variables. It is not unusual for time series data to exhibit some type of upward or downward tendency over time, like trend and seasonability.</p>
+<p>Time series comprise three eseential components: 1. a trend-cycle component, 2. a seasonal component and 3. a remainder component (containing anything else in the time series). When we decompose a time series into components, we usually combine the trend and cycle into a single <em>trend-cycle component</em>.</p>
+<p>In this chapter, we will consider some common methods for extracting these components from a time series. Often this is done to help improve understanding of the time series, but it might also be used to improve forecast accuracy. It is important to mention that given the weak spatio-temporal autocorrelation (previoulsly examined in chapter 2) and the strong temporal autocorrelation on the LCAP network, the use of a local regression model does not require the series to be stationary (in contrast to ARIMA/Box-Jenkins approaches).</p>
+<p>The STL model is applied to time series decomposition with a non-seasonal forecasting method and was developed by Cleveland <span class="citation">(Cleveland and Terpenning <a href="#ref-R-cleveland">1990</a>)</span>. In this chapter, we will apply the method to the data previously examined and we will select some road links to carry-on the method.</p>
+<hr />
+</div>
+<div id="method-description" class="section level2">
+<h2><span class="header-section-number">3.2</span> Method Description</h2>
+<p>The <em>seasonal-trend decomposition with Loess</em> (STLF) is a method for decomposing time series into: a seasonal component <span class="math inline">\(S_t\)</span>, a trend-cycle or simply trend component <span class="math inline">\(T_t\)</span>, and the reminder or error component <span class="math inline">\(R_t\)</span> <span class="citation">(Cleveland and Terpenning <a href="#ref-R-cleveland">1990</a>)</span>. This decomposition may be <em>additive</em> <a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#eq:yt1">(3.1)</a> or <em>multiplicative</em> <a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#eq:yt2">(3.2)</a> where <span class="math inline">\(y_t\)</span> is the data. A seasonally adjusted series is the result of removing the seasonal component from the data.</p>
+<span class="math display" id="eq:yt1">\[\begin{equation} 
+\operatorname {y_t} = S_t + T_t + R_t
+ \tag{3.1}
+\end{equation}\]</span>
+<span class="math display" id="eq:yt2">\[\begin{equation} 
+\operatorname {y_t} = S_t \times T_t \times R_t
+ \tag{3.2}
+\end{equation}\]</span>
+<p>The method known as <em>exponential smoothing state space model</em> (ETS) is applied to algorithms which generate point forecasts to define prediction (or forecast) intervals.</p>
+<p>ETS is able to generate a complete forecast distribution from an univariate time series using exponentially decaying weighted averages of past observations. The state space models correspond to the equations that describe how the error, trend, and seasonal components vary over time. <span class="citation">Hyndman and Athanasopoulos (<a href="#ref-R-Hyndman">2018</a>)</span> describe that each of them can be categorised as <em>additive</em> (A), <em>multiplicative</em> (M), or <em>none</em> (N). For example, ETS(A,N,N) represents a simple exponential smoothing with additive errors method and ETS(M,A,N) a Holt’s linear method with multiplicative errors <span class="citation">(Holt <a href="#ref-R-holt">2004</a>)</span>.</p>
+<p>Putting them together, the STLF model applies a decomposition to a time series. It then models the seasonally adjusted series with an ETS method, re- seasonalizes the result, and finally returns the predictions or forecasts.</p>
+<hr />
+</div>
+<div id="the-modeling-and-solving-approach" class="section level2">
+<h2><span class="header-section-number">3.3</span> The Modeling and Solving Approach</h2>
+<p>To apply the model, we have divided the data as follows: the training set contains the UTT data for the first 23 days and the testing set considers the remaining 7 days. As previously described, there are 180 observations per day, one very 5 minutes from 6 am to 9pm.</p>
+<p>It is important to note that the model accounts only for temporal characteristics and no difference is going to be considered if the road links are adjacent on non-adjacent.</p>
+<p>To set up the experience, first load tha data into the space environement as well as the required packages.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># set the working directory accordingly with setwd()</span>
+<span class="co"># load the data to the space environement</span>
+<span class="kw">load</span>(<span class="st">&quot;wksp2404.RData&quot;</span>) </code></pre></div>
+<pre><code>## Registered S3 method overwritten by &#39;xts&#39;:
+##   method     from
+##   as.zoo.xts zoo</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;quantmod&#39;:
+##   method            from
+##   as.zoo.data.frame zoo</code></pre>
+<pre><code>## Registered S3 methods overwritten by &#39;forecast&#39;:
+##   method             from    
+##   fitted.fracdiff    fracdiff
+##   residuals.fracdiff fracdiff</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install if necessary using &#39;install.packages&#39;</span>
+<span class="kw">library</span>(grid)
+<span class="kw">library</span>(ggplot2)
+<span class="kw">library</span>(forecast)
+<span class="kw">library</span>(grid)</code></pre></div>
+<p>In this experiment, four roads links have been randomly selected: ids. 2112, 2087, 2061 and 473.</p>
+<p>First, we will analyse the time series pattern of each road link. A daily pattern can be observed for road IDs 2112 and 2087 as displayed in Figure <a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fig:stl1">3.1</a>. We can also observe that the same pattern is not apparant for the first 2 roads because of large UTT values that can reach up to 8 seconds per metre.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p1 &lt;-<span class="st"> </span><span class="kw">autoplot</span>(ts_roadLink.<span class="dv">2061</span>, <span class="dt">xlab =</span><span class="st">&quot;Days&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;UTT 2061&quot;</span>)
+p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>))
+p2 &lt;-<span class="st"> </span><span class="kw">autoplot</span>(ts_roadLink.<span class="dv">473</span>, <span class="dt">xlab =</span><span class="st">&quot;Days&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;UTT 473&quot;</span>)
+p2 &lt;-<span class="st"> </span>p2 <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>))
+p3 &lt;-<span class="st"> </span><span class="kw">autoplot</span>(ts_roadLink.<span class="dv">2112</span>, <span class="dt">xlab =</span><span class="st">&quot;Days&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;UTT 2112&quot;</span>)
+p3 &lt;-<span class="st"> </span>p3 <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>))
+p4 &lt;-<span class="st"> </span><span class="kw">autoplot</span>(ts_roadLink.<span class="dv">2087</span>, <span class="dt">xlab =</span><span class="st">&quot;Days&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;UTT 2087&quot;</span>)
+p4 &lt;-<span class="st"> </span>p4 <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>))
+
+<span class="co"># plot the graphs</span>
+<span class="kw">grid.newpage</span>()
+<span class="kw">grid.draw</span>(<span class="kw">rbind</span>(<span class="kw">ggplotGrob</span>(p1),
+                <span class="kw">ggplotGrob</span>(p2),
+                <span class="kw">ggplotGrob</span>(p3),
+                <span class="kw">ggplotGrob</span>(p4),
+                <span class="dt">size =</span> <span class="st">&quot;last&quot;</span>))</code></pre></div>
+<div class="figure"><span id="fig:stl1"></span>
+<img src="_main_files/figure-html/stl1-1.png" alt="Training data set: UTT time series (23 first days) of 4 links." width="672" />
+<p class="caption">
+Figure 3.1: Training data set: UTT time series (23 first days) of 4 links.
+</p>
+</div>
+<p>A polar plot displays a plot of radial lines, symbols or a polygon centered at the midpoint of the plot frame on a 0:360 circle. Positions are interpreted as beginning at the right and moving counterclockwise unless start specifies another starting point or clockwise is <code>TRUE</code>. If <code>add = TRUE</code> is passed as one of the additional arguments, the values will be added to the current plot. Figure <a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fig:stl2">3.2</a> presents polar charts of UTT for the first 3 days of road links 2061 and 473.</p>
+<p>A pattern can be observed between the different days (01/01/2011 - 03/01/2011), so a seasonal trend can be assumed for these road links as well.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ts_seasonplot =<span class="st"> </span><span class="kw">ts</span>(training[<span class="dv">1</span><span class="op">:</span><span class="dv">540</span>,<span class="st">&quot;2061&quot;</span>],
+                      <span class="dt">start=</span><span class="dv">0</span>,
+                      <span class="dt">frequency=</span><span class="dv">180</span>)
+ts_seasonplot2 =<span class="st"> </span><span class="kw">ts</span>(training[<span class="dv">1</span><span class="op">:</span><span class="dv">540</span>,<span class="st">&quot;473&quot;</span>],
+                   <span class="dt">start=</span><span class="dv">0</span>,
+                   <span class="dt">frequency=</span><span class="dv">180</span>)
+p1 &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(ts_seasonplot, <span class="dt">polar=</span><span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;seconds/metre&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Temporal lags&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title=</span><span class="kw">element_blank</span>())<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Polar seasonal plot: Road 2061 UTT&quot;</span>)
+
+p2 &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(ts_seasonplot2, <span class="dt">polar=</span><span class="ot">TRUE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;seconds/metre&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Temporal lags&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.title=</span><span class="kw">element_blank</span>())<span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Polar seasonal plot: Road 473 UTT&quot;</span>)
+
+
+<span class="kw">grid.newpage</span>()
+<span class="kw">grid.draw</span>(<span class="kw">cbind</span>(<span class="kw">ggplotGrob</span>(p1),
+                <span class="kw">ggplotGrob</span>(p2),
+                <span class="dt">size =</span> <span class="st">&quot;last&quot;</span>))</code></pre></div>
+<div class="figure"><span id="fig:stl2"></span>
+<img src="_main_files/figure-html/stl2-1.png" alt="Polar seasonal plots: UTT time series (3 first days) of links with higher variation." width="672" />
+<p class="caption">
+Figure 3.2: Polar seasonal plots: UTT time series (3 first days) of links with higher variation.
+</p>
+</div>
+<p>Next, the STL decomposition is applied for the 23 days time series. The <code>STL()</code> function of <code>stats</code> package decomposes the time series into seasonal, trend and irregular components using loess.<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a></p>
+<p>Initially, the default values of the parameters are used, where the span in lags of the loess window for seasonal extraction, function <code>s.window()</code>, is <code>periodic</code> and for the trend extraction function <code>t.window()</code> is defined by <code>(1.5*period) / (1-(1.5/s.window)</code>.</p>
+<p>Here, we will select two road links: 2112 and 473.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ts_train_<span class="dv">2112</span> &lt;-<span class="st"> </span>ts_roadLink.<span class="dv">2112</span>
+ts_test_<span class="dv">2112</span> &lt;-<span class="st"> </span>ts_test.<span class="dv">2112</span>
+ts_train_<span class="dv">473</span> &lt;-<span class="st"> </span>ts_roadLink.<span class="dv">473</span>
+ts_test_<span class="dv">473</span> &lt;-<span class="st"> </span>ts_test.<span class="dv">473</span>
+
+ts_train_<span class="dv">2112</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">stl</span>(<span class="dt">s.window =</span> <span class="st">&quot;periodic&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Seasonal Decomposition: Road Link 2112 UTT&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:stl31"></span>
+<img src="_main_files/figure-html/stl3-1.png" alt="STL decomposition for time series." width="672" />
+<p class="caption">
+Figure 3.3: STL decomposition for time series.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ts_train_<span class="dv">473</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">stl</span>(<span class="dt">s.window =</span> <span class="st">&quot;periodic&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">autoplot</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Seasonal Decomposition: Road Link 473 UTT&quot;</span>)</code></pre></div>
+<div class="figure"><span id="fig:stl32"></span>
+<img src="_main_files/figure-html/stl3-2.png" alt="STL decomposition for time series." width="672" />
+<p class="caption">
+Figure 3.4: STL decomposition for time series.
+</p>
+</div>
+<p>The <code>STLF()</code> function of the forecast package in R runs the <em>STL</em> + <em>ETS</em> approach with the following default parameters:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">stlf</span>(y, <span class="dt">h =</span> <span class="kw">frequency</span>(x) <span class="op">*</span><span class="st"> </span><span class="dv">2</span>, <span class="dt">s.window =</span> <span class="dv">13</span>, <span class="dt">t.window =</span> <span class="ot">NULL</span>,   <span class="dt">robust =</span> <span class="ot">FALSE</span>, <span class="dt">lambda =</span> <span class="ot">NULL</span>, <span class="dt">biasadj =</span> <span class="ot">FALSE</span>, <span class="dt">x =</span> y, ...)<span class="st">`</span></code></pre></div>
+<p>Some additional parameters are included here:</p>
+<ul>
+<li><code>h()</code>: number of lags or periods for forecasting.</li>
+<li><code>robust()</code>: If <code>TRUE</code>, robust fitting will used in the loess procedure within STL.</li>
+<li><code>lambda()</code>: box-Cox transformation parameter. There will be no transformation if it is equal to <code>NULL</code>. Otherwise, the forecasts are back-transformed via an inverse Box-Cox transformation <span class="citation">(Hyndman and Athanasopoulos <a href="#ref-R-Hyndman">2018</a>)</span>. If set to <code>auto</code>, a transformation value is selected using the <code>BoxCox.lambda()</code> function.</li>
+<li><code>biasadj()</code>: use adjusted back-transformed mean for Box-Cox transformations. If transformed data is used to produce forecasts and fitted values, a regular back transformation will result in median forecasts. If <code>biasadj()</code> is <code>TRUE</code>, an adjustment will be made to produce mean forecasts and fitted values.<a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a></li>
+</ul>
+<p>Additional parameters are specified in the documentation of the R package. For this study we will set the following parameters:</p>
+<ul>
+<li><code>h =1260</code> (<em>7 days from 6 am to 9 pm</em>)</li>
+<li><code>s.window = “periodic</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">f_stl_<span class="dv">2112</span> =<span class="st"> </span><span class="kw">stlf</span>(ts_train_<span class="dv">2112</span>, <span class="dt">h=</span><span class="dv">1260</span>,
+             <span class="dt">s.window =</span> <span class="st">&quot;periodic&quot;</span>, <span class="dt">lambda =</span> <span class="ot">NULL</span>)
+
+f_stl_<span class="dv">473</span> =<span class="st"> </span><span class="kw">stlf</span>(ts_train_<span class="dv">473</span>, <span class="dt">h=</span><span class="dv">1260</span>,
+             <span class="dt">s.window =</span> <span class="st">&quot;periodic&quot;</span>)
+
+p1 &lt;-<span class="st"> </span><span class="kw">autoplot</span>(f_stl_<span class="dv">2112</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Road link 2112 UTT&quot;</span>) 
+p1 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>))
+p2 &lt;-<span class="st"> </span><span class="kw">autoplot</span>(f_stl_<span class="dv">473</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlab</span>(<span class="st">&quot;Day&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Road link 473 UTT&quot;</span>)
+p2 &lt;-<span class="st"> </span>p2 <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>))
+
+<span class="co"># plot the graphs</span>
+<span class="kw">grid.draw</span>(<span class="kw">rbind</span>(<span class="kw">ggplotGrob</span>(p1),
+                <span class="kw">ggplotGrob</span>(p2),
+                <span class="dt">size =</span> <span class="st">&quot;last&quot;</span>)) </code></pre></div>
+<div class="figure"><span id="fig:stl4"></span>
+<img src="_main_files/figure-html/stl4-1.png" alt="Initial STLF UTT prediction for the next 7 days." width="672" />
+<p class="caption">
+Figure 3.5: Initial STLF UTT prediction for the next 7 days.
+</p>
+</div>
+<p>From figure <a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fig:stl4">3.5</a>, it can be observed that as the model predicts UTT values several steps ahead, uncertainty increases. Thus, the interpretation of the forecasts can be significantly misleading if this uncertainty in not accounted for. To be noticed as well, road link 473 presents additive error, whereas road link 2112 presents multiplicative errors.</p>
+<p>The following figure shows the diagnostic checking of the residuals for road link 2112 and 473. It can be observed that the residuals are normally distributed. However, some of the residuals are correlated meaning that there is more information in the errors that STLF has not accounted for.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">checkresiduals</span>(f_stl_<span class="dv">2112</span>)</code></pre></div>
+<pre><code>## Warning in checkresiduals(f_stl_2112): The fitted degrees of freedom is
+## based on the model used for the seasonally adjusted data.</code></pre>
+<div class="figure"><span id="fig:stl51"></span>
+<img src="_main_files/figure-html/stl5-1.png" alt="Residuals from STLF model applied to the time series." width="672" />
+<p class="caption">
+Figure 3.6: Residuals from STLF model applied to the time series.
+</p>
+</div>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from STL +  ETS(M,N,N)
+## Q* = 606.21, df = 358, p-value = 4.663e-15
+## 
+## Model df: 2.   Total lags used: 360</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># If the residuals are not normally distributed and uncorrelated then # there is more information in the errors that has not been accounted for in the model. </span>
+<span class="co"># plot predictions vs obs</span>
+predicted &lt;-<span class="st"> </span>f_stl_<span class="dv">2112</span>[[<span class="st">&quot;mean&quot;</span>]]
+observed &lt;-<span class="st"> </span>ts_test_<span class="dv">2112</span>
+
+<span class="kw">checkresiduals</span>(f_stl_<span class="dv">473</span>)</code></pre></div>
+<pre><code>## Warning in checkresiduals(f_stl_473): The fitted degrees of freedom is
+## based on the model used for the seasonally adjusted data.</code></pre>
+<div class="figure"><span id="fig:stl52"></span>
+<img src="_main_files/figure-html/stl5-2.png" alt="Residuals from STLF model applied to the time series." width="672" />
+<p class="caption">
+Figure 3.7: Residuals from STLF model applied to the time series.
+</p>
+</div>
+<pre><code>## 
+##  Ljung-Box test
+## 
+## data:  Residuals from STL +  ETS(A,N,N)
+## Q* = 480.28, df = 358, p-value = 1.606e-05
+## 
+## Model df: 2.   Total lags used: 360</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># If the residuals are not normally distributed and uncorrelated then </span>
+<span class="co"># there is more information in the errors that has not been accounted for in the model. </span>
+<span class="co"># plot predictions vs obs</span>
+predicted &lt;-<span class="st"> </span>f_stl_<span class="dv">473</span>[[<span class="st">&quot;mean&quot;</span>]]
+observed &lt;-<span class="st"> </span>ts_test_<span class="dv">473</span></code></pre></div>
+<p>We can use the model for one-step-ahead prediction and plot the results, which are shown in figure <a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fig:stl6">3.8</a>. The graph shows the plots of the predicted UTT for road link 2112 and the observed or real values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">predicted &lt;-<span class="st"> </span>f_stl_<span class="dv">2112</span>[[<span class="st">&quot;mean&quot;</span>]]
+observed &lt;-<span class="st"> </span>ts_test_<span class="dv">2112</span>
+
+<span class="co"># Simple plot</span>
+<span class="kw">plot</span>(observed, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">xlab =</span> <span class="st">&quot;Days&quot;</span>, <span class="dt">ylab=</span><span class="st">&quot;UTT&quot;</span>)
+<span class="kw">lines</span>(predicted, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lty=</span><span class="dv">2</span>)
+<span class="kw">legend</span>(<span class="dv">23</span>,<span class="kw">max</span>(observed),<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Observed&quot;</span>,<span class="st">&quot;Predicted&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">ncol=</span><span class="dv">1</span>)</code></pre></div>
+<div class="figure"><span id="fig:stl6"></span>
+<img src="_main_files/figure-html/stl6-1.png" alt="Observed and predicted values of UTT for road link 2112." width="672" />
+<p class="caption">
+Figure 3.8: Observed and predicted values of UTT for road link 2112.
+</p>
+</div>
+<p>We can finally print the measurements of performance of our experiment as displayed in figure <a href="#fig:stl7"><strong>??</strong></a>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">accuracy</span>(predicted, observed)</code></pre></div>
+<pre><code>##                  ME       RMSE        MAE     MPE     MAPE      ACF1
+## Test set 0.02958335 0.04571804 0.03563482 13.4773 18.05772 0.7540641
+##          Theil&#39;s U
+## Test set  1.660111</code></pre>
+<p>Where:</p>
+<ul>
+<li>ME: Mean Error</li>
+<li>RMSE: Root Mean Squared Error</li>
+<li>MAE: Mean Absolute Error</li>
+<li>MPE: Mean Percentage Error</li>
+<li>MAPE: Mean Absolute Percentage Error</li>
+<li>MASE: Mean Absolute Scaled Error The first 5 are traditional measurements of forecast accuracy or performance.</li>
+</ul>
+<p>MASE was introduced by Hyndman who suggested that it should become the standard metric for comparing forecast accuracy across multiple time series, where the forecast error is scaled by the in-sample mean absolute error obtained using the naïve forecasting method <span class="citation">(Hyndman and Athanasopoulos <a href="#ref-R-Hyndman">2018</a>)</span>. MASE values greater than <code>1</code> show the forecasts are poorer than one-step forecasts from the <em>naïve method</em><a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a></p>
+<hr />
+</div>
+<div id="chapter-summary-2" class="section level2">
+<h2><span class="header-section-number">3.4</span> Chapter Summary</h2>
+<p>Time series decomposition involves thinking of a series as a combination of level, trend, seasonality, and noise components. Decomposition provides a useful abstract model for thinking about time series generally and for better understanding problems during time series analysis and forecasting.</p>
+<p>Seasonal and Trend Decomposition with Loess Forecasting Model is a versatile and robust method for decomposing time series. The model presents several advantages over other methods as SEATS and X11 decomposition.</p>
+<ul>
+<li><p>STLF can handle any type of seasonality, not only monthly and quarterly data.</p></li>
+<li><p>The seasonal component is allowed to change over time, and the rate of change can be controlled by the user.</p></li>
+<li><p>The smoothness of the trend-cycle can also be controlled by the user.</p></li>
+</ul>
+<p>It can be robust to outliers (i.e., the user can specify a robust decomposition), so that occasional unusual observations will not affect the estimates of the trend-cycle and seasonal components. They will, however, affect the remainder component.</p>
+
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">error =</span> <span class="ot">TRUE</span>)</code></pre></div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-cleveland">
+<p>Cleveland, Cleveland, R. B., and I. Terpenning. 1990. “STL: A Seasonal Trend Decomposition Procedure Based on Loess.” <em>Journal of Cleaner Production</em> 6: 3–73.</p>
+</div>
+<div id="ref-R-holt">
+<p>Holt, C. C. 2004. “Forecasting Seasonals and Trends by Exponentially Weighted Moving Averages.” <em>International Journal of Forecasting</em> 20(1): 5–10.</p>
+</div>
+<div id="ref-R-Hyndman">
+<p>Hyndman, R. J., and G. Athanasopoulos. 2018. <em>Forecasting: Principles and Practice</em>. OTexts.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>The documentation of <code>STL()</code> is available in: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/stl" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/stl</a><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fnref8">↩</a></p></li>
+<li id="fn9"><p>Full documentation of <code>forecast</code> is available in: <a href="https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/stl" class="uri">https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/stl</a><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fnref9">↩</a></p></li>
+<li id="fn10"><p>With <em>naïve forecasts</em>, we simply set all forecasts to be the value of the last observation.<a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#fnref10">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="support-vector-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

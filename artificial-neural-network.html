@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Artificial Neural Network | Introduction to Spatial Network Forecast with R</title>
+  <meta name="description" content="5 Artificial Neural Network | Introduction to Spatial Network Forecast with R" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Artificial Neural Network | Introduction to Spatial Network Forecast with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Artificial Neural Network | Introduction to Spatial Network Forecast with R" />
+  
+  
+  
+
+<meta name="author" content="Laurent Lacaze Santos &amp; Francisco Salgado Castillo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="support-vector-regression.html">
+<link rel="next" href="summing-up.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivations-and-approach"><i class="fa fa-check"></i>Motivations and Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#online-version"><i class="fa fa-check"></i>Online Version</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a><ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#network"><i class="fa fa-check"></i><b>1.2</b> Network</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#network-fundamentals"><i class="fa fa-check"></i><b>1.2.1</b> Network: fundamentals</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#road-network-and-travel-time-as-a-variable-for-transportation"><i class="fa fa-check"></i><b>1.2.2</b> Road Network and Travel Time as a Variable for Transportation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#forecasting"><i class="fa fa-check"></i><b>1.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#space-time-series-forecasting"><i class="fa fa-check"></i><b>1.3.1</b> Space-time Series Forecasting</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#forecasting-models-of-spatial-network-data"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting Models of Spatial Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#forecasting-data-and-methods"><i class="fa fa-check"></i><b>1.4</b> Forecasting Data and Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#data-description"><i class="fa fa-check"></i><b>1.4.1</b> Data Description</a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#applied-methodologies"><i class="fa fa-check"></i><b>1.4.2</b> Applied Methodologies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#chapter-summary"><i class="fa fa-check"></i><b>1.5</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><i class="fa fa-check"></i><b>2</b> Exploratory Spatio-temporal Data Analysis and Visualisation</a><ul>
+<li class="chapter" data-level="2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#examining-data-patterns-and-characteristics"><i class="fa fa-check"></i><b>2.2</b> Examining Data Patterns and Characteristics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#non-spatio-temporal-data-patterns"><i class="fa fa-check"></i><b>2.2.1</b> Non Spatio-temporal Data Patterns</a></li>
+<li class="chapter" data-level="2.2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-patterns"><i class="fa fa-check"></i><b>2.2.2</b> Temporal Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#spatio-temporal-dependence-and-autocorrelation"><i class="fa fa-check"></i><b>2.3</b> Spatio-temporal Dependence and Autocorrelation</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-autocorrelation"><i class="fa fa-check"></i><b>2.3.1</b> Temporal autocorrelation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#chapter-summary-1"><i class="fa fa-check"></i><b>2.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><i class="fa fa-check"></i><b>3</b> Seasonal and Trend Decomposition with Loess Forecasting Model (STLF)</a><ul>
+<li class="chapter" data-level="3.1" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#method-description"><i class="fa fa-check"></i><b>3.2</b> Method Description</a></li>
+<li class="chapter" data-level="3.3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#the-modeling-and-solving-approach"><i class="fa fa-check"></i><b>3.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="3.4" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#chapter-summary-2"><i class="fa fa-check"></i><b>3.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="support-vector-regression.html"><a href="support-vector-regression.html"><i class="fa fa-check"></i><b>4</b> Support Vector Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="support-vector-regression.html"><a href="support-vector-regression.html#method-description-1"><i class="fa fa-check"></i><b>4.2</b> Method Description</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#svr-to-predict-travel-time-for-urban-road"><i class="fa fa-check"></i><b>4.2.1</b> SVR to Predict Travel Time for Urban Road</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="support-vector-regression.html"><a href="support-vector-regression.html#the-modeling-and-solving-approach-1"><i class="fa fa-check"></i><b>4.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="4.4" data-path="support-vector-regression.html"><a href="support-vector-regression.html#chapter-summary-3"><i class="fa fa-check"></i><b>4.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html"><i class="fa fa-check"></i><b>5</b> Artificial Neural Network</a><ul>
+<li class="chapter" data-level="5.1" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#method-description-2"><i class="fa fa-check"></i><b>5.2</b> Method Description</a></li>
+<li class="chapter" data-level="5.3" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#the-modeling-and-solving-approach-2"><i class="fa fa-check"></i><b>5.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="5.4" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-4"><i class="fa fa-check"></i><b>5.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#a-setting-up-r"><i class="fa fa-check"></i>A Setting-up R</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#b-data-set"><i class="fa fa-check"></i>B Data set</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Spatial Network Forecast with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="artificial-neural-network" class="section level1">
+<h1><span class="header-section-number">5</span> Artificial Neural Network</h1>
+<hr />
+<div id="introduction-4" class="section level2">
+<h2><span class="header-section-number">5.1</span> Introduction</h2>
+<p><em>Artificial Neural Networks</em> (ANN) are a family of computational systems capable of machine learning and pattern recognition emulating the biological nervous systems (for example the animal brain) (see figure <a href="artificial-neural-network.html#fig:ann">5.1</a>). The main applications of ANNs involve computer vision, machine translation, social network filtering, speech recognition and medical diagnosis.</p>
+<div class="figure" style="text-align: center"><span id="fig:ann"></span>
+<img src="Images/ann.png" alt="A biological neural network (left) and an artificial neural network (right). *[Source: @R-makinde]*. " width="666" />
+<p class="caption">
+Figure 5.1: A biological neural network (left) and an artificial neural network (right). <em><span class="citation">(Source: Makinde and Asuquo <a href="#ref-R-makinde">2012</a>)</span></em>.
+</p>
+</div>
+<p>ANN has increasingly draws attention within the industry and the academia (for a detailed presentation of ANN, see <span class="citation">(Zafeiris and Ball <a href="#ref-R-zafeiris">2018</a>)</span> and also <span class="citation">(Wang and Zhong <a href="#ref-R-wang">2016</a>)</span>)</p>
+<hr />
+</div>
+<div id="method-description-2" class="section level2">
+<h2><span class="header-section-number">5.2</span> Method Description</h2>
+<p>Typical ANNs models have a <em>novel structure</em>. In this structure, artificial neurons are aggregated into layers (figure <a href="artificial-neural-network.html#fig:feed">5.2</a>). The input layer is the leftmost, the hidden layer stands in the middle and the output layer is on the right of the network. The <em>neural network</em> is composed of a number of nodes (the neurons) and weighted connections between the nodes (the synapses).</p>
+<p>Nodes called <em>artificial neurons</em> in the neural network can range from several to thousands depending on the complexity of the task to achieve. Similarly, the neural network can have a single hidden layer or multiple hidden layers depending on the task. In a neural network, a signal is transmitted from one node to another. The signal received by a node is processed and then signals additional nodes connected to it. This is known as <em>multilayer feed-forward network</em>, where each layer of nodes receives inputs from the previous layer.</p>
+<p>The input layer contains nodes, variables that encoded the values used to predict an output. The hidden layer contains nodes that do the calculation on the signal passed from the input node and pass the result to the output node(s). In a multiple hidden layer network, the signal is passed to more than one hidden layer before being passed to the output node. The output node is the variable(s) that we intend to predict.</p>
+<div class="figure" style="text-align: center"><span id="fig:feed"></span>
+<img src="Images/feed.png" alt="Sketch of a feed-forward artificial neural network." width="452" />
+<p class="caption">
+Figure 5.2: Sketch of a feed-forward artificial neural network.
+</p>
+</div>
+<p>The hidden neuron is responsible for the calculation of the weighted of all the inputs (a weighted linear combination), adds a bias and then decides whether to fire a neuron sending the signal along the axon (figures <a href="artificial-neural-network.html#fig:feed">5.2</a> and <a href="artificial-neural-network.html#fig:hidden">5.3</a>). At each connection, called <em>synapses</em> or <em>edge</em>, between nodes, the transmitted signal will correspond to a real number <span class="citation">(Gerven and Bohte <a href="#ref-R-gerven">2018</a>)</span>. This number is denominated <em>weight</em> and the learning process can be carried-on.</p>
+<p>The increase or decrease of this weight influences the strength of the signal at the connection. The inputs to each node are aggregated using a weight linear combination (an analytical method applied when more than one attribute is taken into account). If the summation of equation <a href="artificial-neural-network.html#eq:ann1">(5.1)</a> at the node is greater than a certain threshold value, the node transmits a signal along the axon to the next nodes connected to it. The output of each artificial neuron is modified by a non-linear function of the weighted sum of its inputs plus a bias (figure <a href="artificial-neural-network.html#fig:hidden">5.3</a>).</p>
+<div class="figure" style="text-align: center"><span id="fig:hidden"></span>
+<img src="Images/hidden.png" alt="Sketch map of operations inside the hidden neuron." width="490" />
+<p class="caption">
+Figure 5.3: Sketch map of operations inside the hidden neuron.
+</p>
+</div>
+<span class="math display" id="eq:ann1">\[\begin{equation} 
+{\displaystyle \operatorname {z_n} =\sum _{n=1}w_{kn} x_n+ b_k}
+\tag{5.1}
+\end{equation}\]</span>
+<p>In equation <a href="artificial-neural-network.html#eq:ann1">(5.1)</a>, the parameters <span class="math inline">\(b_1, b_2, b_3\)</span> and <span class="math inline">\(w_{1,1}, ..., w_{4,3}\)</span> are “learned” from the data. The values of the weights are often restricted to prevent them from becoming too large. The parameter that restricts the weights is known as the <em>decay parameter</em> and is often set to be equal to <code>0.1</code>.</p>
+<p>In the hidden layer, these non-linear functions or activation functions, like the sigmoid function in <a href="artificial-neural-network.html#eq:ann2">(5.2)</a>, are used to complete the transformation from input nodes to an output layer. This transformation is carried out to reduce the effects of extreme input values making the network more robust and less susceptible to outliers.</p>
+<span class="math display" id="eq:ann2">\[\begin{equation}
+\text s(z) ={\frac {1}{1+e^-z}}
+ \tag{5.2}
+\end{equation}\]</span>
+<p>The weights take random values to begin with, and these are then updated using the observed data. The network is usually trained several times using different random starting points, and the results are averaged. The number of hidden layers, and the number of nodes in each hidden layer, must be specified in advance.</p>
+<p>ANN uses several models such as feed-forward and feedback propagation for prediction. Information moves on single direction for feed-forward network with no cycles or loops in the network. Supervised learning is employed in feedback propagation, requiring training data for predictive analysis. Figure <a href="artificial-neural-network.html#fig:annframework">5.4</a> illustrates a standard process for ANN. The input data is used to training and testing procedures. After applying the model, the accuracy assessment must be done to evaluate the model.</p>
+<div class="figure" style="text-align: center"><span id="fig:annframework"></span>
+<img src="Images/annframework.png" alt="ANN modelling framework *[Source: @R-qazi]*." width="100%" />
+<p class="caption">
+Figure 5.4: ANN modelling framework <em><span class="citation">(Source: Qazi and Khan <a href="#ref-R-qazi">2015</a>)</span></em>.
+</p>
+</div>
+<hr />
+</div>
+<div id="the-modeling-and-solving-approach-2" class="section level2">
+<h2><span class="header-section-number">5.3</span> The Modeling and Solving Approach</h2>
+<p>In this forecasting experiment, we will use supervised learning to train the dataset. As already mentioned in this book, <em>supervised learning</em> is applied by giving a set of labelled training data to the algorithm to predict labels for unseen data. This is achieved by first dividing the dataset into training and test using 80%:20% ratio.</p>
+<p>The first step we need to take prior to any command is to load the data to the space environement and to install some required packages.</p>
+<p>There are several ANN libraries in R. The commonly used ones are <code>amore</code>, <code>rsnns</code>, <code>neuralnet</code> and <code>nnet</code>, the most widely used general purpose library for neural network analysis<a href="#fn15" class="footnoteRef" id="fnref15"><sup>15</sup></a></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install if necessary using &#39;install.packages&#39;</span>
+<span class="co"># we will use a function from github</span>
+<span class="kw">library</span>(nnet) 
+<span class="kw">source_url</span>(<span class="st">&#39;https://gist.githubusercontent.com/fawda123/7471137/raw/466c1474d0a505ff044412703516c34f1a4684a5/nnet_plot_update.r&#39;</span>)
+
+<span class="co"># also, load the data to the space environement</span>
+<span class="kw">load</span>(<span class="st">&quot;forecasting.RData&quot;</span>) 
+tts &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;tts.xlsx&quot;</span>, 
+                  <span class="dt">sheet =</span> <span class="st">&quot;transpose&quot;</span>, <span class="dt">col_names =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p>In this chapter, the same procedure of the former exercises will be applied: 23 days as training data and 7 days as testing. Also, we will apply the <em>feed-forward</em> model, wherein connections between the nodes do not form a cycle, a different approach to <em>recurrent neural networks</em>. In this model, ANNs allow signals to travel one way only: from input to output. There are no feedback (<em>loops</em>), that means that the output of any layer does not affect that same layer. Feed-forward ANNs tend to be straightforward networks that associate inputs with outputs. They are extensively used in pattern recognition.<a href="#fn16" class="footnoteRef" id="fnref16"><sup>16</sup></a></p>
+<p>In the experiment, the training data has to be split into two separate datasets so that we can use the previous 5-minute interval values to predict the next interval. A multiple-input and multiple-output ANN structure have to be deployed using the previous 5-minute interval for the unit travel time (UTT) values for all road links. This process is iterated so as to obtain 4140 observations which is the equivalent to 23 days split at a 5-minute interval.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">UJT.chosen &lt;-<span class="st"> </span>UJT[ ,<span class="kw">c</span>(<span class="st">&quot;1745&quot;</span>,<span class="st">&quot;1882&quot;</span>,<span class="st">&quot;1622&quot;</span>,<span class="st">&quot;1412&quot;</span>,<span class="st">&quot;1413&quot;</span>,<span class="st">&quot;1419&quot;</span>,<span class="st">&quot;2090&quot;</span>,<span class="st">&quot;2054&quot;</span>,<span class="st">&quot;2112&quot;</span>,
+                      <span class="st">&quot;2357&quot;</span>,<span class="st">&quot;2364&quot;</span>,<span class="st">&quot;2059&quot;</span>,<span class="st">&quot;2061&quot;</span>,<span class="st">&quot;2062&quot;</span>)]
+
+<span class="co"># Divide dataset into training and testing data</span>
+training &lt;-<span class="st"> </span>UJT.chosen[<span class="dv">1</span><span class="op">:</span><span class="dv">4140</span>,]
+testing &lt;-<span class="st"> </span>UJT.chosen[<span class="dv">4141</span><span class="op">:</span><span class="dv">5400</span>,]
+training_<span class="dv">1</span> &lt;-training[<span class="op">-</span><span class="dv">1</span>,]</code></pre></div>
+<p>The following step after training the data involves setting the best tune parameters to carry out the prediction. The parameters that mut be set are: 1. <code>decay</code> (i.e. the weight decay) and 2. <code>size</code> (i.e. the number of neurons in the hidden layer). In this exercise, we will use a single hidden layer.</p>
+<p>To ensure we get a good model, it is wise to test a range of values of each of the model parameters. To do this we will use the <code>caret</code> package. <code>mygrid</code> is the selection of parameters that will be tested. To optimize the parameters, a grid (i.e. expanded grid) with a set of decay and size values ranging from 5e-06 to 5e-01 and 1 to 10, are defined. Moreover, we are going to set a 10-fold cross-validation repeated 3 times. All this process must be carries-out to find the optimal model parameter (i.e. the decay and size) to be applied.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">6</span>)
+mygrid &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">.decay=</span><span class="kw">c</span>(<span class="fl">0.000005</span>,<span class="fl">0.00005</span>,<span class="fl">0.0005</span>,<span class="fl">0.005</span>,<span class="fl">0.05</span>,<span class="fl">0.5</span>), <span class="dt">.size=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>))
+fitControl &lt;-<span class="st"> </span><span class="kw">trainControl</span>(<span class="st">&quot;repeatedcv&quot;</span>, <span class="dt">number =</span> <span class="dv">10</span>, <span class="dt">repeats =</span> <span class="dv">3</span>, <span class="dt">returnResamp =</span> <span class="st">&quot;all&quot;</span>)
+<span class="kw">set.seed</span>(<span class="dv">6</span>)
+nnet.parameters  &lt;-<span class="st"> </span><span class="kw">train</span>(training[<span class="dv">1</span><span class="op">:</span><span class="dv">4139</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">14</span>], training_<span class="dv">1</span>[,<span class="dv">14</span>], <span class="dt">method =</span> <span class="st">&quot;nnet&quot;</span>, <span class="dt">metric =</span> <span class="st">&quot;log&quot;</span>, <span class="dt">trControl =</span> fitControl, <span class="dt">tuneGrid=</span>mygrid)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(nnet.parameters)</code></pre></div>
+<div class="figure"><span id="fig:graph1"></span>
+<img src="_main_files/figure-html/graph1-1.png" alt="RMSE error in the traing data simulation using different size and decay parameters." width="672" />
+<p class="caption">
+Figure 5.5: RMSE error in the traing data simulation using different size and decay parameters.
+</p>
+</div>
+<p>Figure <a href="artificial-neural-network.html#fig:graph1">5.5</a> displays the results of this process showing the change in error (RMSE) for the different weight decay and size (#Hidden Units). The same figure also reveals that weight <code>5e-03</code> and size <code>7</code> are the best-tunned parameters for this model.</p>
+<p>The final step involves the prediction and validation of the model using unseen testing dataset. The prediction can be obtained using the best-tuned parameter as mentioned. Figure <a href="artificial-neural-network.html#fig:graph2">5.6</a> presents the internal structure of the neural network using the best-tuned parameters.</p>
+<p>Once the prediction for all the road links has been carried on, we must validate the model by assessing the observed results with the predicted ones. This is done comparing the mean absolute percent error (MAPE) and the mean square error (MSE) index generated between the predict values and observed values (Table XXXX).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot.nnet</span>(nnet.parameters<span class="op">$</span>finalModel)</code></pre></div>
+<div class="figure"><span id="fig:graph2"></span>
+<img src="_main_files/figure-html/graph2-1.png" alt="Internal structure of the ANN using the best-tuned parameters." width="672" />
+<p class="caption">
+Figure 5.6: Internal structure of the ANN using the best-tuned parameters.
+</p>
+</div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predict using best tune parameters</span>
+<span class="kw">set.seed</span>(<span class="dv">6</span>)
+temp.nnet &lt;-<span class="st"> </span><span class="kw">nnet</span>(training[<span class="dv">1</span><span class="op">:</span><span class="dv">3960</span>,], training_<span class="dv">1</span>[<span class="dv">1</span><span class="op">:</span><span class="dv">3960</span>,], <span class="dt">decay=</span><span class="fl">5e-3</span>, <span class="dt">linout =</span> <span class="ot">TRUE</span>, <span class="dt">size=</span><span class="dv">7</span>)
+<span class="kw">set.seed</span>(<span class="dv">6</span>)
+temp.pred&lt;-<span class="kw">predict</span>(temp.nnet, testing)</code></pre></div>
+<p>Here the <code>decay</code> parameter refers to the weight decay, the <code>linout</code> parameter switches to linear output units, and as our task is to do regression this parameter should be TRUE (the alternative is logistic units for classification). The <code>size</code> parameter refers to the number of neurons in the hidden layer. To look at the parameters you can control in <code>nnet</code>, consult the documentation using <code>?nnet</code> on the console panel.</p>
+<p>We finally can analyse the exercise results. Figure <a href="artificial-neural-network.html#fig:result">5.7</a> displays the fit result for road link 2087 and error statistics for all can be accessed on table XXXX.</p>
+<p>We can note that the RMSE error for road links 473 and 2061 higher were higher (i.e. 0.07 and 0.11 in turns) compared to RMSE errors in road links 2087 and 2112, 0.02 and 0.04 respectively. This is also consistent with the MAPE errors values generated by the four-road links (Table.3.4.1). MAPE errors in road links 473 and 2061 were also higher compared to road link 2087 and 2112. This means that road links 2087 and 2112 are more forecastable compared to road links 473 and 2061.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matplot</span>(<span class="kw">cbind</span>(testing[,<span class="dv">1</span>], temp.pred[,<span class="dv">1</span>]),<span class="dt">ylab=</span><span class="st">&quot;UTT&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;Lags&quot;</span>, <span class="dt">main=</span><span class="st">&quot;Road link 2087&quot;</span>, <span class="dt">type=</span><span class="st">&quot;l&quot;</span>, <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>))
+<span class="kw">legend</span>(<span class="dv">1</span>,.<span class="dv">35</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Test&quot;</span>,<span class="st">&quot;Prediction&quot;</span>), <span class="dt">lty =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dt">box.lwd =</span> .<span class="dv">5</span>, <span class="dt">cex =</span> .<span class="dv">65</span> )</code></pre></div>
+<div class="figure"><span id="fig:result"></span>
+<img src="_main_files/figure-html/result-1.png" alt="Observed versus forecast values for road link 2087 for 5-minute interval." width="672" />
+<p class="caption">
+Figure 5.7: Observed versus forecast values for road link 2087 for 5-minute interval.
+</p>
+</div>
+<p>This chapter introduced ANNs for time series modelling. Artificial neural networks are forecasting methods that are based on simple mathematical models of the brain. ANNs has shown to be very appropriated tool in many applications that involve dealing with complex real world sensor data.</p>
+<p>A common criticism of neural networks, particularly in robotics, is that they require too much training for real-world operation. Nonetheless, because of their ability to reproduce and model nonlinear processes, Artificial neural networks have found many applications in a wide range of disciplines such as  system identification and control (vehicle control or trajectory prediction), quantum chemistry,[207] general game playing, face identification and  data mining.</p>
+</div>
+<div id="chapter-summary-4" class="section level2">
+<h2><span class="header-section-number">5.4</span> Chapter Summary</h2>
+<p>This chapter introduced ANNs for time series modelling. Artificial neural networks are forecasting methods that are based on simple mathematical models of the brain. ANNs has shown to be very appropriated tool in many applications that involve dealing with complex real world sensor data.</p>
+<p>A common criticism of neural networks, particularly in robotics, is that they require too much training for real-world operation. Nonetheless, because of their ability to reproduce and model nonlinear processes, artificial neural networks have found many applications in a wide range of disciplines such as system identification and control (vehicle control or trajectory prediction), quantum chemistry, general game playing,face identification and data mining.</p>
+<hr />
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-R-gerven">
+<p>Gerven, M., and S. (Eds.) Bohte. 2018. <em>Artificial Neural Networks as Models of Neural Information Processing</em>. Frontiers Media SA.</p>
+</div>
+<div id="ref-R-makinde">
+<p>Makinde, Ako, F. A., and I. U. Asuquo. 2012. “Prediction of Crude Oil Viscosity Using Feed-Forward Back-Propagation Neural Network.” <em>Petroleum &amp; Coal</em> 54: 120–31.</p>
+</div>
+<div id="ref-R-qazi">
+<p>Qazi, Fayaz, A., and W.A. Khan. 2015. “The Artificial Neural Network for Solar Radiation Prediction and Designing Solar Systems: A Systematic Literature Review.” <em>Journal of Cleaner Production</em> 104: 1–12.</p>
+</div>
+<div id="ref-R-wang">
+<p>Wang, Tsapakis, J., and C. Zhong. 2016. “A Space–time Delay Neural Network Model for Travel Time Prediction.” <em>Engineering Applications of Artificial Intelligence</em> 52: 145–60.</p>
+</div>
+<div id="ref-R-zafeiris">
+<p>Zafeiris, Rutella, D., and G. R. Ball. 2018. “An Artificial Neural Network Integrated Pipeline for Biomarker Discovery Using Alzheimer’s Disease as a Case Study.” <em>Computational and Structural Biotechnology Journal</em> 16: 77–87.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="15">
+<li id="fn15"><p>Package documentation is available at: <a href="http://www.rdocumentation.org/packages/nnet/versions/7.3-12/topics/nnet" class="uri">http://www.rdocumentation.org/packages/nnet/versions/7.3-12/topics/nnet</a><a href="artificial-neural-network.html#fnref15">↩</a></p></li>
+<li id="fn16"><p>This type of organisation is also referred to as <em>bottom-up</em> or <em>top-down</em>.<a href="artificial-neural-network.html#fnref16">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="support-vector-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summing-up.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

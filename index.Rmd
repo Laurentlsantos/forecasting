@@ -1,0 +1,138 @@
+---
+title: "Introduction to Network Data Forecasting with R"
+authors: 
+date: ""
+output: bookdown::gitbook
+site: bookdown::bookdown_site
+
+    
+documentclass: scrbook
+bibliography: reference_list.bib
+biblio-style: apalike
+link-citations: yes
+delete_merged_file: TRUE
+options(knitr.graphics.auto_pdf: TRUE
+rmd_files:
+  html: ["index.Rmd", "abstract.Rmd", "intro.Rmd"]
+  latex: ["abstract.Rmd", "intro.Rmd" , "04-SVR.Rmd"]
+  
+
+config:
+    toc:
+      collapse: subsection
+      scroll_highlight: yes
+      before: null
+      after: null
+    toolbar:
+    position: fixed
+    edit : null
+    search: yes
+    fontsettings:
+      theme: white
+      family: sans
+      size: 2
+      download: ["pdf", "epub", "mobi"]
+    sharing:
+      facebook: yes
+      twitter: yes
+      google: yes
+      linkedin: yes
+      weibo: no
+      instapaper: no
+      vk: no
+      all: ['facebook', 'google', 'twitter', 'linkedin', 'weibo', 'instapaper']
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Preface {-}
+
+
+![](C:/Users/Laurent/Documents/R/win-library/3.5/Bookmark/book/Images/networks.png)
+
+Welcome to our online book on **Introduction to Network Data Forecasting with R**.
+This tutorial book is intended to provide a comprehensive introduction to forecasting strategies of network data. The theoretical of the methods are not exhaustively discussed and further reading can be found in the references at the end of each chapter with more advanced or detailed treatment of the subject.
+
+
+We use R throughout the book, and we intend students to learn how to forecast with R. The concepts and tools are taught on the same frame, so you will learn the theory and the implementation at the same time. R is free and it is a broad-based application for statistical analysis in general, not just for forecasting. 
+
+
+A good introduction to R language can be found in: https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf.The R Studio online learning resources have tutorials and links on various aspects of the R language and R Studio environment: https://www.rstudio.com/online-learning/. And finally, the book R for Data Science presents an excellent introduction of data analytics with R and can be found in https://bookdown.org
+
+Most quantitative prediction problems use either time series data (collected at regular intervals over time) or cross-sectional data (collected at a single point in time). In this book we are concerned with forecasting future data, and we concentrate on the time series domain. Anything that is observed sequentially over time is a time series. In this book, we will only consider time series that are observed at regular intervals of time (e.g., hourly, daily, weekly, monthly, quarterly, annually). Irregularly spaced time series can also occur, but are beyond the scope of this book.
+
+A number of practical decisions problems in business fall into a category known as *network flow problems*. These problems share a common characteristics: they can be described in a graphical form knows as a *network*. This book focusses on the short term forecasting ^[i.e. the forecast of intra-day traffic.] of transportation network flow problem. Travel time data collected using automatic number plate recognition data as part of Transport for London’ s London Congestion Analysis Project ^[A full report on understanding and managing congestion in London is available on http://content.tfl.gov.uk/understanding-and-managing-congestion-in-london.pdf] are applied throughout the book.  
+
+
+An online version of this book is available at *http://XXXXX*. The book has been compiled using *bookdown* ^[For more information, see https://bookdown.org].
+
+
+To comment or ask any additional information about this book, please send an email to *XXXXX@XXXX.com*.
+
+
+## Motivations and Approach {-}
+
+Network science literature has gained popularity to a broad spectrum of areas such as engineering, economics and geography over the last decade. Most of the approaches focus on analysing characteristics and opportunities of enhancing the effectiveness of a network system. Many researches centre on questions regarding structural and dynamics issues, as well as their implications to the outcomes of a network system.
+
+This book demonstrates the mechanics of modeling and solving   network problems and statistical forecasting. The document drives the students to the methodologies with a full description of the each applied method. Furthermore, by means of practical sections, the book offers a comprehensive pathway to modeling and solving techniques required to each forecasting methodology.  
+
+The book also aims to equip the reader with an understanding of the principles underlying each methodology the essential of  data analytics and visualisation technique. Additionally, a full charter is devoted to principles of exploratory spatio-temporal data analysis and visualisation in order to offer the student the foundations of spatio-temporal autocorrelations and spatial-temporal modelling, an essential part to tackle machine learning and spatio-temporal series analysis and forecasting. 
+
+By the end of the book, the student would have the essential skills to apply time series modelling to forecast travel times of network data of urban road, generate insights into spatio-temporal dataset to uncover patterns in spatial, temporal and spatio-temporal data and to evaluate methodologies and discuss strengths and weaknesses of each model.
+
+   
+
+## Prerequisites{-}
+
+To get the most out of this book, it is assumed that you are numerically literate and you also have some programming experience already. 
+
+To run the code of this book, you need fisrt to install RStudio and have tidyverse packages installed. RStudio is an integrated development environment, or IDE, for R programming. You can download and install it from http://www.rstudio.com/download. Further instructions of how to set-up R can be accessed in the Appendix.
+
+Base packages are preinstalled and can be loaded using 
+`library('package_name')`. Libraries from a repository called CRAN (the Comprehensive R Archive Network, https://cran.r-project.org) need to be installed first using `install.packages('package_name')` before they can be loaded using library. 
+
+## Conventions {-}
+
+Throughout the book we use a consistent set of conventions to refer to code:
+
++ Functions are in a code font and followed by parentheses, like `sum()`, or `mean()`.
+
++ Used for program listings to refer to program elements such as variable or function names, databases, data types, element variables, statements and keyword, are in a code font, without parentheses, like `data` or `x`.
+
++ If we want to make it clear what package an object comes from, we’ll use the package name followed by two colons, like `dplyr::mutate()`.
+
+
+We also employ some specific typographical conventions:
+
++ *italic*  indicates new terms, reference sources, filenames and file extensions.
+
++ **bold**  indicates the name of R packages.
+
++ *Constant width italic* shows text that should be replaced with use-supplied values or by values determined by context.
+
+>
+For your convenience (e.g. when you want to copy and run the code), we do not add prompts (> and +) to R source code in this book and outputs are preceded by ##. These are the results of running the code and should not be typed in the console or included in your scripts. You should see these outputs in your R Studio console when you run the code.
+
+## Online Version
+
+An online version of this book is available at *http://xxxxxx*. The book is powered by *https://bookdown.org*. It will continue to evolve in between reprints of the physical book.
+
+
+## Acknowledgements {-}
+
+This book is the results of many people that we would like to address our thanks.
+
+* James Haworth, XXXX
+* Tao Cheng, XXX
+* Fulano
+* Cicrano
+
+
+
+## About the Authors {-}          
+
+(mailto:laurent.santos.18@ucl.ac.uk)

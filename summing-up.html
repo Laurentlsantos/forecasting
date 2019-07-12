@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6 Summing-up | Introduction to Spatial Network Forecast with R</title>
+  <meta name="description" content="6 Summing-up | Introduction to Spatial Network Forecast with R" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6 Summing-up | Introduction to Spatial Network Forecast with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6 Summing-up | Introduction to Spatial Network Forecast with R" />
+  
+  
+  
+
+<meta name="author" content="Laurent Lacaze Santos &amp; Francisco Salgado Castillo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="artificial-neural-network.html">
+<link rel="next" href="appendix.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivations-and-approach"><i class="fa fa-check"></i>Motivations and Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#online-version"><i class="fa fa-check"></i>Online Version</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a><ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#network"><i class="fa fa-check"></i><b>1.2</b> Network</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#network-fundamentals"><i class="fa fa-check"></i><b>1.2.1</b> Network: fundamentals</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#road-network-and-travel-time-as-a-variable-for-transportation"><i class="fa fa-check"></i><b>1.2.2</b> Road Network and Travel Time as a Variable for Transportation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#forecasting"><i class="fa fa-check"></i><b>1.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#space-time-series-forecasting"><i class="fa fa-check"></i><b>1.3.1</b> Space-time Series Forecasting</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#forecasting-models-of-spatial-network-data"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting Models of Spatial Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#forecasting-data-and-methods"><i class="fa fa-check"></i><b>1.4</b> Forecasting Data and Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#data-description"><i class="fa fa-check"></i><b>1.4.1</b> Data Description</a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#applied-methodologies"><i class="fa fa-check"></i><b>1.4.2</b> Applied Methodologies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#chapter-summary"><i class="fa fa-check"></i><b>1.5</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><i class="fa fa-check"></i><b>2</b> Exploratory Spatio-temporal Data Analysis and Visualisation</a><ul>
+<li class="chapter" data-level="2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#examining-data-patterns-and-characteristics"><i class="fa fa-check"></i><b>2.2</b> Examining Data Patterns and Characteristics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#non-spatio-temporal-data-patterns"><i class="fa fa-check"></i><b>2.2.1</b> Non Spatio-temporal Data Patterns</a></li>
+<li class="chapter" data-level="2.2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-patterns"><i class="fa fa-check"></i><b>2.2.2</b> Temporal Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#spatio-temporal-dependence-and-autocorrelation"><i class="fa fa-check"></i><b>2.3</b> Spatio-temporal Dependence and Autocorrelation</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-autocorrelation"><i class="fa fa-check"></i><b>2.3.1</b> Temporal autocorrelation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#chapter-summary-1"><i class="fa fa-check"></i><b>2.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><i class="fa fa-check"></i><b>3</b> Seasonal and Trend Decomposition with Loess Forecasting Model (STLF)</a><ul>
+<li class="chapter" data-level="3.1" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#method-description"><i class="fa fa-check"></i><b>3.2</b> Method Description</a></li>
+<li class="chapter" data-level="3.3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#the-modeling-and-solving-approach"><i class="fa fa-check"></i><b>3.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="3.4" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#chapter-summary-2"><i class="fa fa-check"></i><b>3.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="support-vector-regression.html"><a href="support-vector-regression.html"><i class="fa fa-check"></i><b>4</b> Support Vector Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="support-vector-regression.html"><a href="support-vector-regression.html#method-description-1"><i class="fa fa-check"></i><b>4.2</b> Method Description</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#svr-to-predict-travel-time-for-urban-road"><i class="fa fa-check"></i><b>4.2.1</b> SVR to Predict Travel Time for Urban Road</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="support-vector-regression.html"><a href="support-vector-regression.html#the-modeling-and-solving-approach-1"><i class="fa fa-check"></i><b>4.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="4.4" data-path="support-vector-regression.html"><a href="support-vector-regression.html#chapter-summary-3"><i class="fa fa-check"></i><b>4.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html"><i class="fa fa-check"></i><b>5</b> Artificial Neural Network</a><ul>
+<li class="chapter" data-level="5.1" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#method-description-2"><i class="fa fa-check"></i><b>5.2</b> Method Description</a></li>
+<li class="chapter" data-level="5.3" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#the-modeling-and-solving-approach-2"><i class="fa fa-check"></i><b>5.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="5.4" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-4"><i class="fa fa-check"></i><b>5.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#a-setting-up-r"><i class="fa fa-check"></i>A Setting-up R</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#b-data-set"><i class="fa fa-check"></i>B Data set</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Spatial Network Forecast with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="summing-up" class="section level1">
+<h1><span class="header-section-number">6</span> Summing-up</h1>
+<hr />
+<p>Network science literature has gained popularity to a broad spectrum of areas such as engineering, economics and geography over the last decade. There is a wide range of quantitative forecasting methods, often developed within specific disciplines for specific purposes. Each method has its own properties, accuracies, and costs that must be considered when choosing a specific method.</p>
+<p>We can highlight some recommendations for each model when dealing with a forecasting problem. Certain aspects of each model could be improved and therefore the strengths and weaknesses of each model must be pointed out.</p>
+<p>To improve accuracy results of STLF method, it is essential to perform a fine-tuning process. Each parameter of the model must be adjusted very precisely in order to gain a better accuracy accross different values of lambda. They should be tested for the BoxCox transformations for each time series variable individually. Certain aspects of the whole process are highly computationally expensive; the method could only be ran for a very small number of lags due to the large amount of calculations nested within the function.</p>
+<p>Even though for this case STLF the approach was STL+ETS, there are more methods that could be assessed like for example STL+THETAF or any other function defined by the user that makes use of time series. Finally, the uncertainty of the model could be reduced, and its performance could increase if forecasting for fewer steps ahead or by aggrerating the data in larger lags but with the risk of losing the granularity of the data.</p>
+<p>Support vector regression offers a good generalization performance largely due to the ability to control two different factors: the error-rate on the training data and the capacity of the learning machine to predict unseen data samples. The generalization ability is indeed a key attraction to SVR, largely due to the <em>structural risk minimization</em> (SRM) principle: a strategy to tackle the trade-off between the confidence interval of the VC-dimension and the value of the error frequency.</p>
+<p>Another merit to SVR is the model tuning process that can be streamlined by adaptively resampling methods as k-fold cross-validation. This way, settings that are clearly sub-optimal can be discarded, leading to support vectors that benefits of robustness and the generalization ability to integrate new information into the existing structure of the solution.</p>
+<p>On the other hand, some comments can be drawn about the limitations and improvements. Training for large datasets represents a serious limitation for performance, in particular for speed and parameters control. The process of tuning parameters is time-consuming even though benefiting of the versatility of the caret package for R.</p>
+<p>For artificial neural network, a good way to approach and improve the outcomes of the methods is by changing the set of parameters such as size, weight decay and a number of hidden layers. However, in this case, we can discard changing the weight decay and the size assuming that the best-tuned parameter for both selected during the trading phase. Also, the increasing of the number of hidden layers must be considered in order to improve the ability to identify more complex patterns. In addition to this, aggregating the data at longer interval of time is also a good strategy to avoid cumulative prediction error. However, one thing to note in these non-parametric methods is that selecting the appropriate number of nodes or interpret their structure can be counter-intuitive which are often referred to as <em>black boxes</em>.</p>
+<p>It is important to test the feasibility and quality of each model. The testing process can give important new insights into the nature of the forecasting problem. The testing process is also important because it provides the opportunity to doublecheck the robustness and validity of the model. Also, testing the results against known results helps ensure the structural integrity and validity of the model. After all, we can always come to the conclusion that we need to go back and modify the model formulation and implementation.</p>
+<hr />
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="artificial-neural-network.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

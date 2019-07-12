@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Introduction to Spatial Network Forecast with R</title>
+  <meta name="description" content="Introduction to Spatial Network Forecast with R" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Introduction to Spatial Network Forecast with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Introduction to Spatial Network Forecast with R" />
+  
+  
+  
+
+<meta name="author" content="Laurent Lacaze Santos &amp; Francisco Salgado Castillo" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="getting-started.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-1.3.1/leaflet.js"></script>
+<link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet" />
+<script src="libs/Proj4Leaflet-1.0.1/proj4-compressed.js"></script>
+<script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script>
+<link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet" />
+<script src="libs/leaflet-binding-2.0.2/leaflet.js"></script>
+<script src="libs/leaflet-providers-1.1.17/leaflet-providers.js"></script>
+<script src="libs/leaflet-providers-plugin-2.0.2/leaflet-providers-plugin.js"></script>
+<script src="libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#motivations-and-approach"><i class="fa fa-check"></i>Motivations and Approach</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#prerequisites"><i class="fa fa-check"></i>Prerequisites</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#conventions"><i class="fa fa-check"></i>Conventions</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#online-version"><i class="fa fa-check"></i>Online Version</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#about-the-authors"><i class="fa fa-check"></i>About the Authors</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>1</b> Getting Started</a><ul>
+<li class="chapter" data-level="1.1" data-path="getting-started.html"><a href="getting-started.html#introduction"><i class="fa fa-check"></i><b>1.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.2" data-path="getting-started.html"><a href="getting-started.html#network"><i class="fa fa-check"></i><b>1.2</b> Network</a><ul>
+<li class="chapter" data-level="1.2.1" data-path="getting-started.html"><a href="getting-started.html#network-fundamentals"><i class="fa fa-check"></i><b>1.2.1</b> Network: fundamentals</a></li>
+<li class="chapter" data-level="1.2.2" data-path="getting-started.html"><a href="getting-started.html#road-network-and-travel-time-as-a-variable-for-transportation"><i class="fa fa-check"></i><b>1.2.2</b> Road Network and Travel Time as a Variable for Transportation</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="getting-started.html"><a href="getting-started.html#forecasting"><i class="fa fa-check"></i><b>1.3</b> Forecasting</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="getting-started.html"><a href="getting-started.html#space-time-series-forecasting"><i class="fa fa-check"></i><b>1.3.1</b> Space-time Series Forecasting</a></li>
+<li class="chapter" data-level="1.3.2" data-path="getting-started.html"><a href="getting-started.html#forecasting-models-of-spatial-network-data"><i class="fa fa-check"></i><b>1.3.2</b> Forecasting Models of Spatial Network Data</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="getting-started.html"><a href="getting-started.html#forecasting-data-and-methods"><i class="fa fa-check"></i><b>1.4</b> Forecasting Data and Methods</a><ul>
+<li class="chapter" data-level="1.4.1" data-path="getting-started.html"><a href="getting-started.html#data-description"><i class="fa fa-check"></i><b>1.4.1</b> Data Description</a></li>
+<li class="chapter" data-level="1.4.2" data-path="getting-started.html"><a href="getting-started.html#applied-methodologies"><i class="fa fa-check"></i><b>1.4.2</b> Applied Methodologies</a></li>
+</ul></li>
+<li class="chapter" data-level="1.5" data-path="getting-started.html"><a href="getting-started.html#chapter-summary"><i class="fa fa-check"></i><b>1.5</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><i class="fa fa-check"></i><b>2</b> Exploratory Spatio-temporal Data Analysis and Visualisation</a><ul>
+<li class="chapter" data-level="2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#examining-data-patterns-and-characteristics"><i class="fa fa-check"></i><b>2.2</b> Examining Data Patterns and Characteristics</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#non-spatio-temporal-data-patterns"><i class="fa fa-check"></i><b>2.2.1</b> Non Spatio-temporal Data Patterns</a></li>
+<li class="chapter" data-level="2.2.2" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-patterns"><i class="fa fa-check"></i><b>2.2.2</b> Temporal Patterns</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#spatio-temporal-dependence-and-autocorrelation"><i class="fa fa-check"></i><b>2.3</b> Spatio-temporal Dependence and Autocorrelation</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#temporal-autocorrelation"><i class="fa fa-check"></i><b>2.3.1</b> Temporal autocorrelation</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="exploratory-spatio-temporal-data-analysis-and-visualisation.html"><a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#chapter-summary-1"><i class="fa fa-check"></i><b>2.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><i class="fa fa-check"></i><b>3</b> Seasonal and Trend Decomposition with Loess Forecasting Model (STLF)</a><ul>
+<li class="chapter" data-level="3.1" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#method-description"><i class="fa fa-check"></i><b>3.2</b> Method Description</a></li>
+<li class="chapter" data-level="3.3" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#the-modeling-and-solving-approach"><i class="fa fa-check"></i><b>3.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="3.4" data-path="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html"><a href="seasonal-and-trend-decomposition-with-loess-forecasting-model-stlf.html#chapter-summary-2"><i class="fa fa-check"></i><b>3.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="support-vector-regression.html"><a href="support-vector-regression.html"><i class="fa fa-check"></i><b>4</b> Support Vector Regression</a><ul>
+<li class="chapter" data-level="4.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="support-vector-regression.html"><a href="support-vector-regression.html#method-description-1"><i class="fa fa-check"></i><b>4.2</b> Method Description</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="support-vector-regression.html"><a href="support-vector-regression.html#svr-to-predict-travel-time-for-urban-road"><i class="fa fa-check"></i><b>4.2.1</b> SVR to Predict Travel Time for Urban Road</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="support-vector-regression.html"><a href="support-vector-regression.html#the-modeling-and-solving-approach-1"><i class="fa fa-check"></i><b>4.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="4.4" data-path="support-vector-regression.html"><a href="support-vector-regression.html#chapter-summary-3"><i class="fa fa-check"></i><b>4.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html"><i class="fa fa-check"></i><b>5</b> Artificial Neural Network</a><ul>
+<li class="chapter" data-level="5.1" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#introduction-4"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#method-description-2"><i class="fa fa-check"></i><b>5.2</b> Method Description</a></li>
+<li class="chapter" data-level="5.3" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#the-modeling-and-solving-approach-2"><i class="fa fa-check"></i><b>5.3</b> The Modeling and Solving Approach</a></li>
+<li class="chapter" data-level="5.4" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-4"><i class="fa fa-check"></i><b>5.4</b> Chapter Summary</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
+<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#a-setting-up-r"><i class="fa fa-check"></i>A Setting-up R</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#b-data-set"><i class="fa fa-check"></i>B Data set</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Introduction to Spatial Network Forecast with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Introduction to Spatial Network Forecast with R</h1>
+<p class="author"><em>Laurent Lacaze Santos &amp; Francisco Salgado Castillo</em></p>
+<p class="date"><em>July 2019 First Edition</em></p>
+</div>
+<div id="preface" class="section level1 unnumbered">
+<h1>Preface</h1>
+<hr />
+<div class="figure">
+<img src="Images/networks.png" />
+
+</div>
+<hr />
+<p>Welcome to our book on <strong>Introduction to Spatial Network Forecast with R</strong>. This tutorial book is intended to provide a comprehensive introduction to forecasting strategies of network data.</p>
+<p>We use R throughout the book, and we intend students to learn how to forecast with R. The concepts and tools are taught on the same frame, so you will learn the theory and the implementation at the same time. R is free and it is a broad-based application for statistical analysis in general, not just for forecasting.</p>
+<p>A good introduction to R language can be found in: <a href="https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf" class="uri">https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf</a>. The R Studio online learning resources have tutorials and links on various aspects of the R language and R Studio environment: <a href="https://www.rstudio.com/online-learning/" class="uri">https://www.rstudio.com/online-learning/</a>. And finally, the book R for Data Science presents an excellent introduction of data analytics with R and can be found in <a href="https://bookdown.org" class="uri">https://bookdown.org</a>.</p>
+<p>Most quantitative prediction problems use either time series data (collected at regular intervals over time) or cross-sectional data (collected at a single point in time). In this book we are concerned with forecasting future data, and we concentrate on the time series domain. Anything that is observed sequentially over time is a time series. In this book, we will only consider time series that are observed at regular intervals of time (e.g., hourly, daily, weekly, monthly, quarterly, annually). Irregularly spaced time series can also occur, but are beyond the scope of this book.</p>
+<p>A number of practical decisions problems in business fall into a category known as <em>network flow problems</em>. These problems share a common characteristics: they can be described in a graphical form knows as a <em>network</em>. This book focusses on the short term forecasting<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> of transportation network flow problem. Travel time data collected using automatic number plate recognition data as part of Transport for London’ s London Congestion Analysis Project<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> are applied throughout the book.</p>
+<p>More advanced or detailed treatment of the methods applied in the book can be found in the reference section of each chapter. Comments, feedbacks or any additional information, please send an email to <em><a href="mailto:ucesljl@ucl.ac.uk">ucesljl@ucl.ac.uk</a></em>.</p>
+<div id="motivations-and-approach" class="section level2 unnumbered">
+<h2>Motivations and Approach</h2>
+<p>Network science literature has gained popularity to a broad spectrum of areas such as engineering, economics and geography over the last decade. Most of the approaches focus on analysing characteristics and opportunities of enhancing the effectiveness of a network system. Many researches centre on questions regarding structural and dynamics issues, as well as their implications to the outcomes of a network system.</p>
+<p>This book demonstrates the mechanics of modeling and solving network problems and statistical forecasting. The document drives the students to the methodologies with a description of each applied method. Furthermore, by means of practical sections, the book offers a comprehensive pathway to modeling and solving techniques required to each forecasting methodology.</p>
+<p>The book also aims to equip the reader with an understanding of the principles underlying each methodology, the essential of data analytics and visualisation technique. Additionally, a full charter is devoted to principles of exploratory spatio-temporal data analysis and visualisation in order to offer the foundations of spatio-temporal autocorrelation and spatial-temporal modelling, an essential part to tackle machine learning and spatio-temporal series analysis and forecasting.</p>
+<p>By the end of the book, the student would have the essential skills to apply time series modelling to forecast travel times of network data of urban road, generate insights into spatio-temporal dataset to uncover patterns in spatial, temporal and spatio-temporal data and to evaluate methodologies and discuss strengths and weaknesses of each model.</p>
+</div>
+<div id="prerequisites" class="section level2 unnumbered">
+<h2>Prerequisites</h2>
+<p>To get the most out of this book, it is assumed that you are numerically literate and you also have some programming experience already.</p>
+<p>To run the code of this book, you need fisrt to install RStudio and have tidyverse packages installed. RStudio is an integrated development environment, or IDE, for R programming. You can download and install it from <a href="http://www.rstudio.com/download" class="uri">http://www.rstudio.com/download</a>. Further instructions of how to set-up R can be accessed in the Appendix.</p>
+<p>Base packages are preinstalled and can be loaded using <code>library('package_name')</code>. Libraries from a repository called CRAN (the Comprehensive R Archive Network, <a href="https://cran.r-project.org" class="uri">https://cran.r-project.org</a>) need to be installed first using <code>install.packages('package_name')</code> before they can be loaded using library.</p>
+</div>
+<div id="conventions" class="section level2 unnumbered">
+<h2>Conventions</h2>
+<p>Throughout the book we use a consistent set of conventions to refer to code:</p>
+<ul>
+<li><p>Functions are in a code font and followed by parentheses, like <code>sum()</code>, or <code>mean()</code>.</p></li>
+<li><p>Used for program listings to refer to program elements such as variable or function names, databases, data types, element variables, statements and keyword, are in a code font, without parentheses, like <code>data</code> or <code>x</code>.</p></li>
+<li><p>If we want to make it clear what package an object comes from, we’ll use the package name followed by two colons, like <code>dplyr::mutate()</code>.</p></li>
+</ul>
+<p>We also employ some specific typographical conventions:</p>
+<ul>
+<li><p><em>italic</em> indicates new terms, reference sources, filenames and file extensions and name of R packages.</p></li>
+<li><p><em>Constant width italic</em> shows text that should be replaced with use-supplied values or by values determined by context.</p></li>
+</ul>
+<p>For your convenience (for example, when you want to copy and run the code), we do not add prompts (&gt; and +) to R source code in this book and outputs are preceded by ##. These are the results of running the code and should not be typed in the console or included in your scripts. You should see these outputs in your R Studio console when you run the code.</p>
+</div>
+<div id="online-version" class="section level2 unnumbered">
+<h2>Online Version</h2>
+<p>An online version of this book is available at <a href="https://laurentlsantos.github.io/forecasting/" class="uri">https://laurentlsantos.github.io/forecasting/</a>. The book has been compiled using <strong>bookdown</strong><a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> and will continue to evolve in between reprints of the physical book.</p>
+</div>
+<div id="acknowledgements" class="section level2 unnumbered">
+<h2>Acknowledgements</h2>
+<p>We are particularly indebted to those at <strong>University College London (UCL)</strong> who have been generous with their time and expertise. From the Department of Civil, Environmental and Geomatic Engineering (CEGE), we are extremely grateful to professor James Haworth from <strong>SpaceTimeLab </strong>, who introduced and equipped with the techniques of spatial-temporal data analysis and big data analytics. We are also thankful to James Haworth for the data applied throughout the book.</p>
+<p>We also must thank Tao Cheng, professor in geoinformatics at UCL, for all the skills and on-going academic mentorship in the field of spatial analysis and geocomputation. To Mohamed Ibrahim, PhD researcher at SpaceTimeLab, for all support and debugging with R programming.</p>
+<p>We must also extent our thanks to Transport of London which is ultimately responsible for the London Congestion Analysis Project (LCAP), a significant achievement in understanding and managing congestion in a such fascinating city.</p>
+</div>
+<div id="about-the-authors" class="section level2 unnumbered">
+<h2>About the Authors</h2>
+<blockquote>
+<p><strong>Laurent Lacaze Santos</strong> is a geographer and business manager with passion for spatial analytics and location intelligence. Having achieved a solid experience in project management, operations management and consultancy, he extended his expertise to geographic information science, remote sensing and quantitative geography, and took part in projects of GIS infrastructure, environmental planning and business intelligence. Laurent holds a master’ s degree in geosciences (governance of risk and resources) with emphasis on remote sensing and GIS from Heidelberg University and is a master’s candidate on geospatial sciences (geographic information science and computing) at University College London (UCL).</p>
+</blockquote>
+<p>Email address: <a href="mailto:laurent.santos.18@ucl.ac.uk">laurent.santos.18@ucl.ac.uk</a></p>
+<p>Follow me on twitter: <a href="http://twitter.com/laurentlsantos" class="uri">http://twitter.com/laurentlsantos</a></p>
+<blockquote>
+<p><strong>Francisco Salgado Castillo</strong> is an experienced engineer in the fields of environment, urban planning and geospatial analysis. He gained experience in projects of environment and spatial analysis at the Instituto de Estudios de Regimen Seccional del Ecuador (IERSE) / Universidad del Azuay for sustainable development in Ecuador. Francisco holds a double undergraduate degree in systems and telematics engineer and electronic engineer and also holds a Master’s in spatio-temporal analytics and big data mining at University College London (UCL).</p>
+</blockquote>
+<p>Email address: <a href="mailto:chescosalgado@gmail.com">chescosalgado@gmail.com</a></p>
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>i.e. the forecast of intra-day traffic.<a href="index.html#fnref1">↩</a></p></li>
+<li id="fn2"><p>A full report on understanding and managing congestion in London is available on <a href="http://content.tfl.gov.uk/understanding-and-managing-congestion-in-london.pdf" class="uri">http://content.tfl.gov.uk/understanding-and-managing-congestion-in-london.pdf</a><a href="index.html#fnref2">↩</a></p></li>
+<li id="fn3"><p>For more information, see <a href="https://bookdown.org" class="uri">https://bookdown.org</a><a href="index.html#fnref3">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="getting-started.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
