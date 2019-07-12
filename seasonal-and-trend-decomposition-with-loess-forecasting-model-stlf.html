@@ -261,7 +261,7 @@ p4 &lt;-<span class="st"> </span>p4 <span class="op">+</span><span class="st"> <
                 <span class="kw">ggplotGrob</span>(p4),
                 <span class="dt">size =</span> <span class="st">&quot;last&quot;</span>))</code></pre></div>
 <div class="figure"><span id="fig:stl1"></span>
-<img src="_main_files/figure-html/stl1-1.png" alt="Training data set: UTT time series (23 first days) of 4 links." width="672" />
+<img src="Images/stl1-1.png" alt="Training data set: UTT time series (23 first days) of 4 links." width="672" />
 <p class="caption">
 Figure 3.1: Training data set: UTT time series (23 first days) of 4 links.
 </p>
@@ -294,7 +294,7 @@ p2 &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(ts_seasonp
                 <span class="kw">ggplotGrob</span>(p2),
                 <span class="dt">size =</span> <span class="st">&quot;last&quot;</span>))</code></pre></div>
 <div class="figure"><span id="fig:stl2"></span>
-<img src="_main_files/figure-html/stl2-1.png" alt="Polar seasonal plots: UTT time series (3 first days) of links with higher variation." width="672" />
+<img src="Images/stl2-1.png" alt="Polar seasonal plots: UTT time series (3 first days) of links with higher variation." width="672" />
 <p class="caption">
 Figure 3.2: Polar seasonal plots: UTT time series (3 first days) of links with higher variation.
 </p>
@@ -313,7 +313,7 @@ ts_train_<span class="dv">2112</span> <span class="op">%&gt;%</span><span class=
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Seasonal Decomposition: Road Link 2112 UTT&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:stl31"></span>
-<img src="_main_files/figure-html/stl3-1.png" alt="STL decomposition for time series." width="672" />
+<img src="Images/stl3-1.png" alt="STL decomposition for time series." width="672" />
 <p class="caption">
 Figure 3.3: STL decomposition for time series.
 </p>
@@ -324,7 +324,7 @@ Figure 3.3: STL decomposition for time series.
 <span class="st">  </span><span class="kw">theme</span>(<span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">15</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Seasonal Decomposition: Road Link 473 UTT&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:stl32"></span>
-<img src="_main_files/figure-html/stl3-2.png" alt="STL decomposition for time series." width="672" />
+<img src="Images/stl3-2.png" alt="STL decomposition for time series." width="672" />
 <p class="caption">
 Figure 3.4: STL decomposition for time series.
 </p>
@@ -359,7 +359,7 @@ p2 &lt;-<span class="st"> </span>p2 <span class="op">+</span><span class="st"> <
                 <span class="kw">ggplotGrob</span>(p2),
                 <span class="dt">size =</span> <span class="st">&quot;last&quot;</span>)) </code></pre></div>
 <div class="figure"><span id="fig:stl4"></span>
-<img src="_main_files/figure-html/stl4-1.png" alt="Initial STLF UTT prediction for the next 7 days." width="672" />
+<img src="Images/stl4-1.png" alt="Initial STLF UTT prediction for the next 7 days." width="672" />
 <p class="caption">
 Figure 3.5: Initial STLF UTT prediction for the next 7 days.
 </p>
@@ -370,7 +370,7 @@ Figure 3.5: Initial STLF UTT prediction for the next 7 days.
 <pre><code>## Warning in checkresiduals(f_stl_2112): The fitted degrees of freedom is
 ## based on the model used for the seasonally adjusted data.</code></pre>
 <div class="figure"><span id="fig:stl51"></span>
-<img src="_main_files/figure-html/stl5-1.png" alt="Residuals from STLF model applied to the time series." width="672" />
+<img src="Images/stl5-1.png" alt="Residuals from STLF model applied to the time series." width="672" />
 <p class="caption">
 Figure 3.6: Residuals from STLF model applied to the time series.
 </p>
@@ -391,7 +391,7 @@ observed &lt;-<span class="st"> </span>ts_test_<span class="dv">2112</span>
 <pre><code>## Warning in checkresiduals(f_stl_473): The fitted degrees of freedom is
 ## based on the model used for the seasonally adjusted data.</code></pre>
 <div class="figure"><span id="fig:stl52"></span>
-<img src="_main_files/figure-html/stl5-2.png" alt="Residuals from STLF model applied to the time series." width="672" />
+<img src="Images/stl5-2.png" alt="Residuals from STLF model applied to the time series." width="672" />
 <p class="caption">
 Figure 3.7: Residuals from STLF model applied to the time series.
 </p>
@@ -417,7 +417,7 @@ observed &lt;-<span class="st"> </span>ts_test_<span class="dv">2112</span>
 <span class="kw">lines</span>(predicted, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,<span class="dt">lty=</span><span class="dv">2</span>)
 <span class="kw">legend</span>(<span class="dv">23</span>,<span class="kw">max</span>(observed),<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;Observed&quot;</span>,<span class="st">&quot;Predicted&quot;</span>), <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dt">lty=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">ncol=</span><span class="dv">1</span>)</code></pre></div>
 <div class="figure"><span id="fig:stl6"></span>
-<img src="_main_files/figure-html/stl6-1.png" alt="Observed and predicted values of UTT for road link 2112." width="672" />
+<img src="Images/stl6-1.png" alt="Observed and predicted values of UTT for road link 2112." width="672" />
 <p class="caption">
 Figure 3.8: Observed and predicted values of UTT for road link 2112.
 </p>
