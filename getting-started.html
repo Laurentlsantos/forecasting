@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>1 Getting Started | Introduction to Spatial Network Forecast with R</title>
   <meta name="description" content="1 Getting Started | Introduction to Spatial Network Forecast with R" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
   <meta property="og:title" content="1 Getting Started | Introduction to Spatial Network Forecast with R" />
   <meta property="og:type" content="book" />
@@ -21,7 +21,7 @@
   
   
 
-<meta name="author" content="Laurent Lacaze Santos &amp; Francisco Salgado Castillo" />
+<meta name="author" content="Laurent L. Santos and Francisco S. Castillo" />
 
 
 
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html">
-<link rel="next" href="exploratory-spatio-temporal-data-analysis-and-visualisation.html">
+<link rel="prev" href="index.html"/>
+<link rel="next" href="exploratory-spatio-temporal-data-analysis-and-visualisation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -169,12 +169,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#the-modeling-and-solving-approach-2"><i class="fa fa-check"></i><b>5.3</b> The Modeling and Solving Approach</a></li>
 <li class="chapter" data-level="5.4" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-4"><i class="fa fa-check"></i><b>5.4</b> Chapter Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
-<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#a-setting-up-r"><i class="fa fa-check"></i>A Setting-up R</a></li>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#b-data-set"><i class="fa fa-check"></i>B Data set</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -197,6 +197,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <hr />
 <div id="introduction" class="section level2">
 <h2><span class="header-section-number">1.1</span> Introduction</h2>
+<p>The spatial arrangement within cities is at an elementary level, composed of streets, buildings, infrastructure and leasure areas. Space is connected by physical networks configured to support various forms of transportation such as railway lines, footpaths and roads. The variable efficiency of such networks impacts the times to travel between connected locations and influence future developments by impacting the way in which people use space.</p>
 <p>Complex network attracts increasing attention in many fields and analytics tools offer tool for empirically investigating the structure and evolution of network structures. Since the latter period of the 20th century, there has been an explosion of research into the structure and function of complex networks.</p>
 <p>In this chapter, you will be introduced to two main topics that will ground all the following chapters of the book: 1. network and 2. forecasting techniques for spatial network data. To understand the fundamentals of these two broad topics, the basic concepts and terminology of networks are introduced. Particular attention is paid to spatial networks in order to limit the scope of the review. Methods for forecasting network data are subsequently introduced.</p>
 </div>
@@ -207,41 +208,41 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>The network science literature provides a diverse range of tools and techniques for analysing and enhancing our understanding of the structure and large-scale statistical properties of networks. A <em>network</em> is a set of discrete items, called <em>nodes</em>, with connections between them, called <em>edges</em>. A network is typically represented as a graph G = (N, E), with a set of N nodes and E edges. In road network, each intersection is a node and the road segments between intersections are edges.</p>
 <p>A <em>bimodal network</em> (also called bipartite network) is one which connects two varieties of things, whereas <em>unimodal</em> (or unimode) network connects nodes with same characteristics (see figure <a href="getting-started.html#fig:chunk-Topology">1.1</a>)</p>
 <div class="figure" style="text-align: center"><span id="fig:chunk-Topology"></span>
-<img src="Images/nodes.png" alt="Topology of Networks *[source: @R-socialnetwork]*." width="50%" />
+<img src="_book/Images/nodes.png" alt="Topology of networks *[source: @R-socialnetwork]*" width="50%" />
 <p class="caption">
-Figure 1.1: Topology of Networks <em><span class="citation">(source: Wasserman and Faust <a href="#ref-R-socialnetwork">1994</a>)</span></em>.
+Figure 1.1: Topology of networks <em><span class="citation">(source: Wasserman and Faust <a href="#ref-R-socialnetwork">1994</a>)</span></em>
 </p>
 </div>
 <p>To analyse and model a network process, a network is represented mathematically by a matrix describing the list of adjacency edges of incoming and outgoing vectors (Figure <a href="getting-started.html#fig:chunk-matrix">1.2</a>).</p>
 <div class="figure" style="text-align: center"><span id="fig:chunk-matrix"></span>
-<img src="Images/nodematrix.png" alt="The London Congestion Analysis Project Road Links." width="546" />
+<img src="_book/Images/nodematrix.png" alt="The London Congestion Analysis Project road links" width="546" />
 <p class="caption">
-Figure 1.2: The London Congestion Analysis Project Road Links.
+Figure 1.2: The London Congestion Analysis Project road links
 </p>
 </div>
-<p>In broad terms, networks can be divides into four categories <em><span class="citation">(see Newman <a href="#ref-R-newman">2003</a>)</span></em></p>
+<p>In broad terms, networks can be divides into four categories <em><span class="citation">(see Newman <a href="#ref-R-newman">2003</a>)</span></em>:</p>
 <ul>
-<li><p><em>Social Network</em>: a set of people (or animals) or groups of people with associations between them. The core foundation of social network analysis is to understand the effect of social networks on social processes (e.g., friendship networks, academic collaborations, business relationships and animal behavior).</p></li>
-<li><p><em>Information Network</em>: networks of information flow. Pieces of information are stored at the nodes. The edges between nodes signify connections between information sources (e.g., academic citation networks and world wide web).</p></li>
-<li><p><em>Biological Network</em>: networks of biological systems, where the nodes are biological entities and the edges are connections between them (e.g., metabolic networks, neural networks and food webs).</p></li>
-<li><p><em>Technological Network</em>: man-made, physical networks, designed to transport people, resources or commodities (e.g., transportation networks of roads, rail and airlines).</p></li>
+<li><p><em>Social Network</em>: a set of people (or animals) with associations between them. The core foundation of social network analysis is to understand the effect of social networks on social processes as for example friendship networks, a business network or even animal interactions.</p></li>
+<li><p><em>Information Network</em>: networks of information flow. Pieces of information are stored at the nodes. The edges between nodes signify connections between information sources (for example academic citation networks and the world wide web).</p></li>
+<li><p><em>Biological Network</em>: networks of biological systems, where the nodes are biological entities and the edges are connections between them (for example, metabolic networks, neural networks and food webs).</p></li>
+<li><p><em>Technological Network</em>: man-made, physical networks, designed to transport people, resources or commodities as the network of streets and roads, railways and airlines.</p></li>
 </ul>
-<p>The scales of analysis of a network is usually decomposed in three different levels of description. Network theory has long been applied to transportation systems studies which seek to understand the dynamics of physical networks designed to transport people and to evaluate impacts on transportation system performance <em><span class="citation">(Xie and Levinson <a href="#ref-R-xie">2007</a>)</span></em>.</p>
+<p>The scales of analysis of a network is usually decomposed in three different levels of description as presented in figure <a href="getting-started.html#fig:chunk-network">1.3</a>. Network theory has long been applied to transportation systems studies which seek to understand the dynamics of physical networks designed to transport people and to evaluate impacts on transportation system performance <em><span class="citation">(Xie and Levinson <a href="#ref-R-xie">2007</a>)</span></em>.</p>
 <div class="figure" style="text-align: center"><span id="fig:chunk-network"></span>
-<img src="Images/network.png" alt="Network Structures *[source: @R-borgatti]*." width="70%" />
+<img src="_book/Images/network.png" alt="Network structures *[source: @R-borgatti]*." width="70%" />
 <p class="caption">
-Figure 1.3: Network Structures <em><span class="citation">(source: Borgatti and Johnson <a href="#ref-R-borgatti">2013</a>)</span></em>.
+Figure 1.3: Network structures <em><span class="citation">(source: Borgatti and Johnson <a href="#ref-R-borgatti">2013</a>)</span></em>.
 </p>
 </div>
 </div>
 <div id="road-network-and-travel-time-as-a-variable-for-transportation" class="section level3">
 <h3><span class="header-section-number">1.2.2</span> Road Network and Travel Time as a Variable for Transportation</h3>
-<p><em>Road network</em> is among the most recognisable and studied types of network. Traffic on urban networks is fundamentally different to traffic on highways, primarily because it is interrupted by traffic signals at intersections.</p>
+<p><em>Road network</em> is among the most recognisable and studied types of network. Traffic on urban networks is fundamentally different to traffic on highways, primarily because it is interrupted by traffic signals at intersections. When flow volume within a network nears capacity, mobility can slow or stop depending on the exact nature of these constraints.</p>
 <p>The underlying factor that determines the speed of the traffic stream on both highways and urban roads is interaction between the demand for road space and the supply of road space, known as <em>capacity</em>. Congestion is characterised by slow moving stop and go traffic and is very frustrating and costly for road users.</p>
 <p><em>Travel time</em> (TT) is one of the most important variables in transportation. Accurate travel-time prediction is crucial to the development of transportation systems and advanced traveler information systems. Travel time prediction in conjunction with traffic network analytics fosters route-guidance systems and supports transportation planning and operations.</p>
 <p>Some of the common applications of traffic network analysis are listed on table <a href="getting-started.html#tab:table1">1.1</a>.</p>
 <table style="width:100%;">
-<caption><span id="tab:table1">Table 1.1: </span> Traffic Network Analysis Applications <em><span class="citation">(source: Ordnance-Survey <a href="#ref-R-os">2017</a>)</span></em></caption>
+<caption><span id="tab:table1">Table 1.1: </span> Traffic network analysis applications <em><span class="citation">(source: Ordnance-Survey <a href="#ref-R-os">2017</a>)</span></em></caption>
 <colgroup>
 <col width="46%" />
 <col width="53%" />
@@ -283,13 +284,12 @@ Figure 1.3: Network Structures <em><span class="citation">(source: Borgatti and 
 </tr>
 </tbody>
 </table>
-<p>The study of road network structure predates the field of complex networks and has long been of interest due to its inherent impact on transportation system performance. The factor that determines the speed of the traffic stream on both highways and urban roads is interaction between the demand for road space and the supply of road space known as capacity. Congestion is characterised by slow moving stop and go traffic.</p>
-<p>Forecasting models of network data have traditionally focussed on time series approaches. In such approaches, the network structure is ignored and each of the time series at the nodes is forecast independently. More recent approaches use network structures to construct spatio-temporal models that capture the spatio-temporal dependency between locations where network data are observed. Increasingly, researchers and practitioners are turning towards less conventional techniques, often with their roots in the machine learning (ML) and data mining communities, that are better equipped to deal with the heterogeneous, nonlinear and multi-scale properties of large scale network datasets.</p>
-<p>For the forecast of urban network, observations are made at regular intervals using traffic static sensors, such as loop detectors or automatic number plate recognition (ANPR) cameras, which measure traffic conditions at a fixed point, or along a section of road called a <em>link</em>. These sensors are distributed across the network, and when considered together, form a space time series that describes the network process (e.g. transportation systems, the internet and electrical grids). Observations are made at regular intervals using sensors, which form time series. These sensors are distributed across the network, and when considered together, form a space time series that describes the network process (e.g. transportation systems, the internet and electrical grids).</p>
+<p>The study of road network structure predates the field of complex networks and has long been of interest due to its inherent impact on transportation system performance. Forecasting models of network data have traditionally focussed on time series approaches. In such approaches, the network structure is ignored and each of the time series at the nodes is forecast independently. More recent approaches use network structures to construct spatio-temporal models that capture the spatio-temporal dependency between locations where network data are observed. Increasingly, researchers and practitioners are turning towards less conventional techniques, often with their roots in the machine learning (ML) and data mining communities, that are better equipped to deal with the heterogeneous, nonlinear and multi-scale properties of large scale network datasets.</p>
+<p>For the forecast of urban network, observations are made at regular intervals using traffic static sensors, such as loop detectors or automatic number plate recognition (ANPR) cameras, which measure traffic conditions at a fixed point or along a section of road called a <em>link</em>. These sensors are distributed across the network, and when considered together, form a space time series that describes the network process (for instance, transportation systems, the internet and electrical grids).</p>
 <p>The majority of the literature on traffic forecasting focuses on <em>data-driven approaches</em>. In such approaches, statistical relationships are extracted from historical data, and used to forecast future traffic conditions using information about the current traffic conditions.</p>
 <p>Spatial network data combines the challenges of modelling time series and spatial series, which are autocorrelation, nonstationarity, heterogeneity and nonlinearity <span class="citation">(see Haworth <a href="#ref-R-haworth2013">2013</a>)</span>. The choice of method depends on the dataset and an explanatory spatio-temporal data analysis must be done to better understand the characteristics of the data.</p>
 <table>
-<caption><span id="tab:table2">Table 1.2: </span> Forecast of Traffic Data <em><span class="citation">(source: Haworth <a href="#ref-R-haworth2013">2013</a>)</span></em></caption>
+<caption><span id="tab:table2">Table 1.2: </span> Forecast of traffic data <em><span class="citation">(source: Haworth <a href="#ref-R-haworth2013">2013</a>)</span></em></caption>
 <colgroup>
 <col width="25%" />
 <col width="15%" />
@@ -326,7 +326,7 @@ Figure 1.3: Network Structures <em><span class="citation">(source: Borgatti and 
 </blockquote>
 <div id="space-time-series-forecasting" class="section level3">
 <h3><span class="header-section-number">1.3.1</span> Space-time Series Forecasting</h3>
-<p>A time series is a set of observations on quantitative variables collected over time. In conjunction with a spatial component, the series turns out to be a <em>space-time series</em> of values for a quantitative variable over time. Most businesses keep track of a number of time series and geographic information science also rely on data series to forecast environmental risk, weather forecast, land-cover changes over time and rout network forecast.</p>
+<p>A time series is a set of observations on quantitative variables collected over time. In conjunction with a spatial component the series turns out to be a <em>space-time series</em> of values for a quantitative variable over time. Most businesses keep track of a number of time series and geographic information science also rely on data series to forecast environmental risk, weather forecast, land-cover changes over time and route network forecast.</p>
 <p>There are many forms to predict the behaviour of a dependent variable using one or more independent variables that are believed to be related to the dependent variable in a causal fashion. Although we can sometimes use regression models to predictive analysis, its is not always possible to do so. For example, if we do not know which causal independent variables are influencing a particular time series variable, we cannot build a regression model. And even if we do have some idea which causal variables are affecting a time series, there might not be any data available for those variables. Moreover, even if the estimated regression function fits the data well, we might have to forecast the values of the causal independent variables in order to estimate future values of the dependent (time series) variable.</p>
 <p>That said, it might be difficult or even undesirable to forecast time series data using a regression model. In these cases, it is advisable to use a time series forecasting method in which we analyse the past behaviour of the time series variables in order to predict its future behaviour <span class="citation">(for further details and examples of forecasting methods, we recommend Hyndman and Athanasopoulos <a href="#ref-R-Hyndman">2018</a>)</span>. The predictability of an event depends on several factors:</p>
 <ul>
@@ -334,8 +334,8 @@ Figure 1.3: Network Structures <em><span class="citation">(source: Borgatti and 
 <li>how much data is available;</li>
 <li>whether the forecast can somehow affect the process that is being forecast.</li>
 </ul>
-<p>Techniques that analyse the past behaviour of a time series variable to predict the future are referred to as <em>extrapolation model</em>.</p>
-<p>The goal of an extrapolation model is to identify a function <em>f()</em> that produces accurate forecasts of future values of the time series variable.</p>
+<p>Techniques that analyse the past behaviour of a time series variable to predict the future are referred to as <em>extrapolation models</em>.</p>
+<p>The goal of an extrapolation model is to identify a function <span class="math inline">\(f()\)</span> that produces accurate forecasts of future values of the time series variable.</p>
 <p>Many methods have been developed to model time series data. A common approach involves trying several modeling techniques on a given data set and evaluating how well they explain the past behavior of the time series variable. The most used accuracy measures are the <em>mean absolute deviation</em> (MAD), the <em>mean absolute percent error</em> (MAPE), the <em>mean square error</em> (MSE), ant the <em>root mean square error</em> (RMSE).</p>
 <p>In each of these formulas <span class="math inline">\(Y_i\)</span> represents the actual value of <span class="math inline">\(i^{th}\)</span> observation in the time series and <span class="math inline">\({\hat {Y_{i}}}\)</span> is the forecasted value for this observation. These quantities measure the differences between the actual values in the time series and the predicted, or fitted, values generated by the forecasting technique. These quantities are defined as follows:</p>
 <span class="math display" id="eq:MAD">\[\begin{equation} 
@@ -364,7 +364,7 @@ Figure 1.3: Network Structures <em><span class="citation">(source: Borgatti and 
 <p>Forecasting models of network data have traditionally focussed on time and flow series approaches. In such approaches, the network structure is ignored and each of the time series at the nodes is forecast independently.</p>
 <p>Because of the many factors that determine urban traffic, it is very difficult to model traffic as a physical process. The majority of the literature on traffic forecasting focuses on data-driven approaches. In such methods, statistical relationships are extracted from historical data, and used to forecast future traffic conditions.</p>
 <p>Observations of a space-time process are made at the nodes of a spatial network, which are sampling locations such as weather stations or traffic flow detectors. At each node an individual time series is collected that describes the temporal evolution of the space-time process at a single point in space.</p>
-<p>A time series <span class="math inline">\(z=\{z(t)/z \in T\}\)</span> in temporal domain T is a sequence of observations of a process taken at equally spaced time intervals: <span class="math inline">\(z_t, z_{t-1}, z_{t-2}, … z_{t-{(n-1)}}\)</span>, where <span class="math inline">\(z_t\)</span> denotes the value of some quantity <span class="math inline">\(z\)</span> at time <span class="math inline">\(t\)</span> and <span class="math inline">\(n\)</span> is the lengh of the serie. <span class="math inline">\(z_{t-{(n-1)}}\)</span> indicates the time at which the first available observation was made <em><span class="citation">(for further details, see Haworth <a href="#ref-R-haworth2013">2013</a>)</span></em>.</p>
+<p>A time series <span class="math inline">\(z=\{z(t)/z \in T\}\)</span> in temporal domain T is a sequence of observations of a process taken at equally spaced time intervals: <span class="math inline">\(z_t, z_{t-1}, z_{t-2}, … z_{t-{(n-1)}}\)</span>, where <span class="math inline">\(z_t\)</span> denotes the value of some quantity <span class="math inline">\(z\)</span> at time <span class="math inline">\(t\)</span> and <span class="math inline">\(n\)</span> is the lengh of the serie. <span class="math inline">\(z_{t-{(n-1)}}\)</span> indicates the time at which the first available observation was made <span class="citation">(for further details, see Haworth <a href="#ref-R-haworth2013">2013</a>)</span>.</p>
 <hr />
 </div>
 </div>
@@ -374,7 +374,7 @@ Figure 1.3: Network Structures <em><span class="citation">(source: Borgatti and 
 <div id="data-description" class="section level3">
 <h3><span class="header-section-number">1.4.1</span> Data Description</h3>
 <p>The traffic data used in this book are travel time times (TTs) provided by Transport for London (TfL) as part of the London Congestion Analysis Project (LCAP). To ensure accurate results with exploratory data analysis and predictive models, some links have been removed from the original dataset due to poor data quality<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>.</p>
-<p>To visualize the The London Congestion Analysis Project Road Links we need to install the package <code>tmap</code>. Note that any package need to be installed first using the command <code>install.packages('package_name')</code> before it can be loaded using the command <code>library()</code>. Before a library is loaded its functions will be inaccessible, even if it is installed.</p>
+<p>To visualize the London congestion analysis project road links we need to install the package <code>tmap</code>. Note that any package need to be installed first using the command <code>install.packages('package_name')</code> before it can be loaded using the command <code>library()</code>. Before a library is loaded its functions will be inaccessible, even if it is installed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install if necessary using the command &#39;install.packages&#39;</span>
 <span class="kw">library</span>(tmap)</code></pre></div>
 <p>The package <code>tmap</code> (thematic map) creates a tmap-element that specifies a spatial data object, which we refer to as <em>shape</em>. tmap is a library that simplifies many of the elements of map creation. It uses the basic syntax style of the most popular graphics library in R.</p>
@@ -398,16 +398,16 @@ bmap &lt;-<span class="st"> </span><span class="kw">read_osm</span>(LCAPShp, <sp
             <span class="dt">compass.type =</span> <span class="st">&quot;8star&quot;</span>,
             <span class="dt">main.title.position =</span> <span class="kw">c</span>(<span class="st">&quot;center&quot;</span>, <span class="st">&quot;top&quot;</span>))</code></pre></div>
 <div class="figure"><span id="fig:chunk-LCAP"></span>
-<img src="Images/chunk-LCAP-1.png" alt="The London Congestion Analysis Project Road Links." width="672" />
+<img src="_main_files/figure-html/chunk-LCAP-1.png" alt="The London congestion analysis project road links" width="672" />
 <p class="caption">
-Figure 1.4: The London Congestion Analysis Project Road Links.
+Figure 1.4: The London congestion analysis project road links
 </p>
 </div>
 <p>LCAP is a system of automatic number plate recognition (ANPR) cameras, maintained by TfL, that monitors London’s road network 24 hours a day. Link travel times of individual vehicles are recorded and aggregated at the 5 minute level, providing travel time information on all of London’s major roads with 288 observations per link per day.Figure <a href="getting-started.html#fig:chunk-TT">1.5</a> displays the main features of the monitor system.</p>
 <div class="figure" style="text-align: center"><span id="fig:chunk-TT"></span>
-<img src="Images/ANPR.png" alt="Travel Time Data *[source: adapted from @R-haworth2013]*." width="100%" />
+<img src="_book/Images/ANPR.png" alt="Travel time data *[source: adapted from @R-haworth2013]*." width="100%" />
 <p class="caption">
-Figure 1.5: Travel Time Data <em><span class="citation">(source: adapted from Haworth <a href="#ref-R-haworth2013">2013</a>)</span></em>.
+Figure 1.5: Travel time data <em><span class="citation">(source: adapted from Haworth <a href="#ref-R-haworth2013">2013</a>)</span></em>.
 </p>
 </div>
 <p>The TT of a vehicle can be defined as the time taken to travel between two fixed points, for example, between one intersection and the next, or between home and work. Formally, the TT of an individual vehicle can be expressed as:</p>
@@ -416,7 +416,7 @@ Figure 1.5: Travel Time Data <em><span class="citation">(source: adapted from Ha
  \tag{1.5}
 \end{equation}\]</span>
 <p>Where <span class="math inline">\(t_1\)</span> is the time at which the vehicle began its journey and <span class="math inline">\(t_2\)</span> is the time at which it completed its journey.</p>
-<p>The road networks of major cities are equipped with sensor networks that measure traffic properties directly from traffic stream. The data used in the turotial part of this book were collected using automatic number plate recognition (ANPR) technology on London’s road. Each road link is paired with two ANPR cameras installed on the start and the end of the link. The first camera records the vehicle license plate and entrance time and the second camera records the exit time by matching the license plate. For this study individual TTs were aggregated at 5 minutes intervals giving 180 observations per day between 6am and 9pm. The travel time data is presented in unit travel times (second/metre).</p>
+<p>The road networks of major cities are equipped with sensor networks that measure traffic properties directly from traffic stream. The data used in the tutotial sections of this book were collected using automatic number plate recognition (ANPR) technology on London’s road. Each road link is paired with two ANPR cameras installed on the start and the end of the link. The first camera records the vehicle license plate and entrance time and the second camera records the exit time by matching the license plate. For this study individual TTs were aggregated at 5 minutes intervals giving 180 observations per day between 6am and 9pm. The travel time data is presented in unit travel times (second/metre).</p>
 </div>
 <div id="applied-methodologies" class="section level3">
 <h3><span class="header-section-number">1.4.2</span> Applied Methodologies</h3>
@@ -428,7 +428,7 @@ Figure 1.5: Travel Time Data <em><span class="citation">(source: adapted from Ha
 <p>There is a wide range of quantitative forecasting methods, often developed within specific disciplines for specific purposes. Each method has its own properties, accuracies, and costs that must be considered when choosing a specific method.</p>
 <p>When forecasting time series data, the aim is to estimate how the sequence of observations will continue into the future. To evaluate forecast accuracy it is common practice to separate the available data into two portions, <em>training</em> and <em>test data</em>. The training data is applied to estimate the parameters of the method and the test data is used to evaluate its accuracy.</p>
 <div class="figure" style="text-align: center"><span id="fig:chunk-Training"></span>
-<img src="Images/data.png" alt="Training Data." width="100%" />
+<img src="_book/Images/data.png" alt="Training Data." width="100%" />
 <p class="caption">
 Figure 1.6: Training Data.
 </p>
@@ -447,15 +447,15 @@ Figure 1.6: Training Data.
 <ul>
 <li><em><strong>Supervised learning</strong></em>: given a set of labelled training data, a function is sought to predict labels for unseen data.
 <ul>
-<li>Examples: Regression (e.g. kernel ridge regression, SVR, ANNs); classification (e.g. SVMs, random forests, ANNs).</li>
+<li>Examples: Regression (e.g. kernel ridge regression, SVR, ANNs); classification (for example SVMs, random forests, ANNs).</li>
 </ul></li>
 <li><em><strong>Semi-supervised learning</strong></em>: small amount of labelled data, large amount of unlabelled data. Using both can improve predictions.
 <ul>
-<li>Examples: Generative models, low density separation, graphical methods.</li>
+<li>Examples: Generative models, low density separation and graphical methods.</li>
 </ul></li>
 <li><em><strong>Unsupervised Learning</strong></em>: no labels are supplied with training data, and structure is sought.
 <ul>
-<li>Examples: clustering (e.g. k-means, hierarchical), dimensionality reduction (e.g. PCA), self-organizing maps, density estimation, data mining techniques.</li>
+<li>Examples: clustering (k-means, hierarchical), dimensionality reduction (PCA), self-organizing maps, density estimation, data mining techniques.</li>
 </ul></li>
 <li><em><strong>Reinforcement learning</strong></em>: a computer must perform a task in a given environment without knowledge of whether it has come close to its goal.
 <ul>
@@ -463,10 +463,10 @@ Figure 1.6: Training Data.
 </ul></li>
 </ul>
 <p><em><span class="citation">(source: Cheng and Haworth <a href="#ref-R-cheng2">2019</a>)</span></em></p>
-<p>The focus of ML is on generalisation, the ability of the algorithm to predict unseen data samples. It stands as a different approach of classical statistics, where the focus is on in-sample performance and different to data mining which seeks to discover new knowledge from unlabelled data. ML does not assume that the functional form of the relationship between dependent and independent variables is known and can be described by model parameter. The technique minimizes error on unseen data, known as <em>structural risk minimization</em>, with no prior assumptions made on the probability distribution of the data.</p>
-<p>The choice of method depends on the characteristics of the dataset. Modelling and forecasting of highly nonlinear, nonstationary and heterogeneous processes requires models that are able to account for these properties. Table <a href="getting-started.html#tab:methods1">1.3</a> and <a href="getting-started.html#tab:methods2">1.4</a> outline the mains characteristics of each methology.</p>
+<p>The focus of ML is on generalisation, the ability of the algorithm to predict unseen data samples. It stands as a different approach of classical statistics, where the focus is on in-sample performance, and different to data mining which seeks to discover new knowledge from unlabelled data. ML does not assume that the functional form of the relationship between dependent and independent variables is known and can be described by model parameter. The technique minimizes error on unseen data, known as <em>structural risk minimization</em>, with no prior assumptions made on the probability distribution of the data.</p>
+<p>The choice of method depends on the characteristics of the dataset. Modelling and forecasting of highly nonlinear, nonstationary and heterogeneous processes require models able to account for these properties. Table <a href="getting-started.html#tab:methods1">1.3</a> and <a href="getting-started.html#tab:methods2">1.4</a> outline the mains characteristics of each methology.</p>
 <table>
-<caption><span id="tab:methods1">Table 1.3: </span> Statistical Parametric Framework Models.</caption>
+<caption><span id="tab:methods1">Table 1.3: </span> Statistical parametric framework models</caption>
 <colgroup>
 <col width="45%" />
 <col width="54%" />
@@ -480,16 +480,16 @@ Figure 1.6: Training Data.
 <tbody>
 <tr class="odd">
 <td>The space-time autoregressive integrated moving average (STARIMA)</td>
-<td>STARIMA has been adapted from ARIMA models. Is the only one that explicitly accounts for spatial structure in the data through the use of a spatial weight matrix.</td>
+<td>STARIMA has been adapted from ARIMA models. It explicitly accounts for spatial structure in the data through the use of a spatial weight matrix.</td>
 </tr>
 <tr class="even">
 <td>Seasonal and Trend Decomposition using Loess Forecasting Model (STLF)</td>
-<td>The STLF model comprises of a time series decomposition and a non-seasonal forecasting method. It decomposes the time series into a seasonal component, a trend-cycle or simply trend component and the reminder component.</td>
+<td>The STLF model comprises of a time series decomposition and a non-seasonal forecasting method. It decomposes the time series into a seasonal component, a trend-cycle or simply trend component, and the reminder component.</td>
 </tr>
 </tbody>
 </table>
 <table>
-<caption><span id="tab:methods2">Table 1.4: </span> Machine Learning Models.</caption>
+<caption><span id="tab:methods2">Table 1.4: </span> Machine learning models</caption>
 <colgroup>
 <col width="45%" />
 <col width="54%" />
@@ -502,16 +502,16 @@ Figure 1.6: Training Data.
 </thead>
 <tbody>
 <tr class="odd">
-<td>Support Vector Machine (SVM)</td>
-<td>Makes use of the kernel trick to map the input data into a high dimensional feature space, where a linear algorithm is used to find a solution that becomes.</td>
+<td>Support vector machine (SVM)</td>
+<td>Makes use of the kernel trick to map the input data into a high dimensional feature space with a linear algorithm.</td>
 </tr>
 <tr class="even">
 <td>Kernel ridge regression (KRR)</td>
 <td>Is a related Kernel method based on linear least squares regression.</td>
 </tr>
 <tr class="odd">
-<td>Artificial Neural Networks (ANN)</td>
-<td>The basic structure of an ANN is a layered, feed-forward, completely connected network of artificial neurons, termed nodes.</td>
+<td>Artificial neural networks (ANN)</td>
+<td>The basic structure of an ANN is a layered, feed-forward, completely connected network of artificial neurons, termed <em>nodes</em>.</td>
 </tr>
 </tbody>
 </table>
@@ -525,8 +525,7 @@ Figure 1.6: Training Data.
 <p>In this chapter, you have been introduced to modelling networks and forecast methods and principles. Forecasting models of network data have traditionally focussed on time series approaches. In such approaches, the network structure is ignored and each of the time series at the nodes is forecast independently.</p>
 <p>Spatial network data combines the challenges of modelling time series and spatial series, which are autocorrelation, nonstationarity, heterogeneity and nonlinearity.</p>
 <p>Many methods have been developed to model time series data. A common approach involves trying several modeling techniques on a given data set and evaluating how well they explain the past behavior of the time series variable. The most used accuracy measures are the mean absolute deviation (MAD), the mean absolute percent error (MAPE), the mean square error (MSE), ant the root mean square error (RMSE).</p>
-<p>The literature on space-time forecasting can be broadly separated into two categories: the statistical parametric framework and machine learninhg models.</p>
-<p>The choice of method depends on the characteristics of the dataset. Modelling and forecasting of highly nonlinear, nonstationary and heterogeneous processes requires models that are able to account for these properties.</p>
+<p>The literature on space-time forecasting can be broadly separated into two categories: the statistical parametric framework and machine learninhg models. The choice of method depends on the characteristics of the dataset. Modelling and forecasting of highly nonlinear, nonstationary and heterogeneous processes requires models that are able to account for these properties.</p>
 <hr />
 
 </div>
@@ -623,8 +622,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();

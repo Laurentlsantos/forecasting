@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>8 References | Introduction to Spatial Network Forecast with R</title>
-  <meta name="description" content="8 References | Introduction to Spatial Network Forecast with R" />
-  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+  <title>References | Introduction to Spatial Network Forecast with R</title>
+  <meta name="description" content="References | Introduction to Spatial Network Forecast with R" />
+  <meta name="generator" content="bookdown 0.13 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="8 References | Introduction to Spatial Network Forecast with R" />
+  <meta property="og:title" content="References | Introduction to Spatial Network Forecast with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,12 +16,12 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="8 References | Introduction to Spatial Network Forecast with R" />
+  <meta name="twitter:title" content="References | Introduction to Spatial Network Forecast with R" />
   
   
   
 
-<meta name="author" content="Laurent Lacaze Santos &amp; Francisco Salgado Castillo" />
+<meta name="author" content="Laurent L. Santos and Francisco S. Castillo" />
 
 
 
@@ -30,7 +30,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="appendix.html">
+<link rel="prev" href="appendix.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -169,12 +169,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="5.3" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#the-modeling-and-solving-approach-2"><i class="fa fa-check"></i><b>5.3</b> The Modeling and Solving Approach</a></li>
 <li class="chapter" data-level="5.4" data-path="artificial-neural-network.html"><a href="artificial-neural-network.html#chapter-summary-4"><i class="fa fa-check"></i><b>5.4</b> Chapter Summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="summing-up.html"><a href="summing-up.html"><i class="fa fa-check"></i><b>6</b> Summing-up</a></li>
-<li class="chapter" data-level="7" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>7</b> Appendix</a><ul>
+<li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#a-setting-up-r"><i class="fa fa-check"></i>A Setting-up R</a></li>
 <li class="chapter" data-level="" data-path="appendix.html"><a href="appendix.html#b-data-set"><i class="fa fa-check"></i>B Data set</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -192,8 +192,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1">
-<h1><span class="header-section-number">8</span> References</h1>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
 <hr />
 
 <div id="refs" class="references">
@@ -238,6 +238,9 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div>
 <p>Qazi, Fayaz, A., and W.A. Khan. 2015. “The Artificial Neural Network for Solar Radiation Prediction and Designing Solar Systems: A Systematic Literature Review.” <em>Journal of Cleaner Production</em> 104: 1–12.</p>
+</div>
+<div>
+<p>Singleton, Spielman, A., and D. Folch. 2018. <em>Urban Analytics</em>. Spatial Analytics; GIS Series.</p>
 </div>
 <div>
 <p>Wang, Tsapakis, J., and C. Zhong. 2016. “A Space–time Delay Neural Network Model for Travel Time Prediction.” <em>Engineering Applications of Artificial Intelligence</em> 52: 145–60.</p>
@@ -335,8 +338,9 @@ gitbook.start({
     script.type = "text/javascript";
     var src = "";
     if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:" && /^https?:/.test(src))
-      src = src.replace(/^https?:/, '');
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
