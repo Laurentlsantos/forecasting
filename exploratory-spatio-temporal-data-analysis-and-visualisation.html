@@ -237,7 +237,7 @@ tts &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class
 <p>To introduce the fundamentals of ESTDA, we will explore the technique to 28 road links selected within the <em>London Congestion Charging Zone</em> (CCZ).<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> Within this area, a fee is charged on most motor vehicles operating in Central London between 07:00 and 18:00 Mondays to Fridays. It is not charged on weekends, public holidays or between Christmas Day and New Year’s Day.</p>
 <p>An example of road link shape is presented in figure <a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#fig:roadlink">2.1</a>.</p>
 <div class="figure" style="text-align: center"><span id="fig:roadlink"></span>
-<img src="_book/Images/roadlink.png" alt="Road Link ID 2061" width="70%" />
+<img src="Images/roadlink.png" alt="Road Link ID 2061" width="70%" />
 <p class="caption">
 Figure 2.1: Road Link ID 2061
 </p>
@@ -278,7 +278,7 @@ sdev</code></pre></div>
      <span class="dt">col=</span><span class="st">&quot;yellow&quot;</span>)
 <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(LCAPShp.chosen<span class="op">@</span>data<span class="op">$</span>LENGTH), <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:roadlength"></span>
-<img src="_main_files/figure-html/roadlength-1.png" alt="Histogram of link lengths and mean value shown in red line" width="672" />
+<img src="Images/roadlength-1.png" alt="Histogram of link lengths and mean value shown in red line" width="672" />
 <p class="caption">
 Figure 2.2: Histogram of link lengths and mean value shown in red line
 </p>
@@ -292,7 +292,7 @@ Figure 2.2: Histogram of link lengths and mean value shown in red line
         <span class="dt">ylab=</span><span class="st">&quot;seconds/metre&quot;</span>,
         <span class="dt">col=</span><span class="st">&quot;light blue&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:UTT"></span>
-<img src="_main_files/figure-html/UTT-1.png" alt="Boxplot with UTT within a 30 days period by road link ID" width="672" />
+<img src="Images/UTT-1.png" alt="Boxplot with UTT within a 30 days period by road link ID" width="672" />
 <p class="caption">
 Figure 2.3: Boxplot with UTT within a 30 days period by road link ID
 </p>
@@ -309,7 +309,7 @@ Figure 2.3: Boxplot with UTT within a 30 days period by road link ID
      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">15.00</span>),
      <span class="dt">col=</span><span class="st">&quot;yellow&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:histUTT"></span>
-<img src="_main_files/figure-html/histUTT-1.png" alt="Histogram of the unit travel time with lower end frequency of UTT" width="672" />
+<img src="Images/histUTT-1.png" alt="Histogram of the unit travel time with lower end frequency of UTT" width="672" />
 <p class="caption">
 Figure 2.4: Histogram of the unit travel time with lower end frequency of UTT
 </p>
@@ -323,7 +323,7 @@ Figure 2.4: Histogram of the unit travel time with lower end frequency of UTT
      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">170000</span>),
      <span class="dt">col=</span><span class="st">&quot;yellow&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:histUTT2"></span>
-<img src="_main_files/figure-html/histUTT2-1.png" alt="Histogram of the unit travel time with upper end frequency of UTT" width="672" />
+<img src="Images/histUTT2-1.png" alt="Histogram of the unit travel time with upper end frequency of UTT" width="672" />
 <p class="caption">
 Figure 2.5: Histogram of the unit travel time with upper end frequency of UTT
 </p>
@@ -333,7 +333,7 @@ Figure 2.5: Histogram of the unit travel time with upper end frequency of UTT
 <span class="kw">qqnorm</span>(UJT.chosen)
 <span class="kw">qqline</span>(UJT.chosen, <span class="dt">col=</span><span class="st">&quot;red&quot;</span>)  <span class="co"># The straight red line is the theoretical normal distribution</span></code></pre></div>
 <div class="figure"><span id="fig:QQ"></span>
-<img src="_main_files/figure-html/QQ-1.png" alt="QQ-Plot of UTT in chosen road-links" width="672" />
+<img src="Images/QQ-1.png" alt="QQ-Plot of UTT in chosen road-links" width="672" />
 <p class="caption">
 Figure 2.6: QQ-Plot of UTT in chosen road-links
 </p>
@@ -345,7 +345,7 @@ TIME &lt;-<span class="st"> </span>LCAPShp.chosen<span class="op">@</span>data<s
 <span class="kw">pairs</span>(<span class="op">~</span>LENGTH<span class="op">+</span>MeanUTT<span class="op">+</span>TIME,<span class="dt">data=</span>LCAPShp.chosen<span class="op">@</span>data,
       <span class="dt">main=</span><span class="st">&quot;Scatterplot Matrix&quot;</span>)  </code></pre></div>
 <div class="figure"><span id="fig:plotmatrix2"></span>
-<img src="_main_files/figure-html/plotmatrix2-1.png" alt="Pairwise scatterplots" width="672" />
+<img src="Images/plotmatrix2-1.png" alt="Pairwise scatterplots" width="672" />
 <p class="caption">
 Figure 2.7: Pairwise scatterplots
 </p>
@@ -354,7 +354,7 @@ Figure 2.7: Pairwise scatterplots
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Time</span>
 <span class="kw">scatterplot3d</span>(<span class="dt">x=</span>TIME, <span class="dt">y=</span>LCAPShp.chosen<span class="op">@</span>data<span class="op">$</span>LENGTH, <span class="dt">z=</span>MeanUTT, <span class="dt">xlab=</span><span class="st">&quot;TTime [sec]&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;Lenght[m]&quot;</span>, <span class="dt">zlab =</span> <span class="st">&quot;Mean UTT [sec/m]&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:scatterplot3dtime"></span>
-<img src="_main_files/figure-html/scatterplot3dtime-1.png" alt="Scatterplots 3d with time on x axis" width="672" />
+<img src="Images/scatterplot3dtime-1.png" alt="Scatterplots 3d with time on x axis" width="672" />
 <p class="caption">
 Figure 2.8: Scatterplots 3d with time on x axis
 </p>
@@ -362,7 +362,7 @@ Figure 2.8: Scatterplots 3d with time on x axis
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Lengh</span>
 <span class="kw">scatterplot3d</span>(<span class="dt">x=</span>LCAPShp.chosen<span class="op">@</span>data<span class="op">$</span>LENGTH, <span class="dt">y=</span>TIME, <span class="dt">z=</span>MeanUTT, <span class="dt">xlab=</span><span class="st">&quot;Lenght[m]&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;TTime [sec]&quot;</span>, <span class="dt">zlab =</span> <span class="st">&quot;Mean UTT [sec/m]&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:scatterplot3dlenght"></span>
-<img src="_main_files/figure-html/scatterplot3dlenght-1.png" alt="Scatterplots 3d with lenght on x axis" width="672" />
+<img src="Images/scatterplot3dlenght-1.png" alt="Scatterplots 3d with lenght on x axis" width="672" />
 <p class="caption">
 Figure 2.9: Scatterplots 3d with lenght on x axis
 </p>
@@ -431,7 +431,7 @@ Figure 2.10: Time series of Mean UTT per day over 30 days.
 <p>The plot on figure <a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#fig:ACF">2.11</a> displays the level of correlation of the time series with itself at each of the first 1260 lags (7 days of data) for a single road link (RoadID: 2112) The blue line is approximate 95% confidence interval. The slow decrease in the ACF as the lags increase is due to the trend, while the scalloped shape is due the seasonality.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">acf</span>(UJT.chosen[,<span class="st">&quot;2112&quot;</span>], <span class="dt">lag.max =</span> <span class="dv">1260</span>, <span class="dt">main=</span> <span class="st">&quot;ACF Roadlink 2112&quot;</span>, <span class="dt">plot =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <div class="figure"><span id="fig:ACF"></span>
-<img src="_main_files/figure-html/ACF-1.png" alt="Temporal autocorrelation function of UTT at 1260 lags for road link 2112" width="672" />
+<img src="Images/ACF-1.png" alt="Temporal autocorrelation function of UTT at 1260 lags for road link 2112" width="672" />
 <p class="caption">
 Figure 2.11: Temporal autocorrelation function of UTT at 1260 lags for road link 2112
 </p>
@@ -448,7 +448,7 @@ acm &lt;-<span class="st"> </span><span class="kw">t</span>(ac<span class="op">$
 
 <span class="kw">levelplot</span>(<span class="kw">t</span>(acm), <span class="dt">aspect=</span><span class="st">&quot;fill&quot;</span>, <span class="dt">xlab=</span><span class="st">&quot;TEMPORAL LAG&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;ROAD LINK ID&quot;</span>)</code></pre></div>
 <div class="figure"><span id="fig:ACFheatmap"></span>
-<img src="_main_files/figure-html/ACFheatmap-1.png" alt="Temporal autocorrelation heatmap of selected road links: daily UTT in 01-01-2011" width="672" />
+<img src="Images/ACFheatmap-1.png" alt="Temporal autocorrelation heatmap of selected road links: daily UTT in 01-01-2011" width="672" />
 <p class="caption">
 Figure 2.12: Temporal autocorrelation heatmap of selected road links: daily UTT in 01-01-2011
 </p>
@@ -839,7 +839,7 @@ knitr<span class="op">::</span><span class="kw">kable</span>(wm[<span class="dv"
 <p>To support determining if the data is stationary and the type of correlation, lag plots might be calculated for the first four lags of each road link. Figure <a href="exploratory-spatio-temporal-data-analysis-and-visualisation.html#fig:acf2">2.13</a> presents the plot for road link 2344. We can see that there is an increasing scatter with progressive lags due to the clustering around the slopes. Furthermore, it can be stated that temporal interdependence between consecutive observations is linear.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">lag.plot</span>(UJT.chosen[,<span class="st">&quot;2344&quot;</span>], <span class="dt">lags =</span> <span class="dv">10</span>, <span class="dt">main=</span> <span class="st">&quot;ACF, 2344&quot;</span>, <span class="dt">do.lines =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <div class="figure"><span id="fig:acf2"></span>
-<img src="_main_files/figure-html/acf2-1.png" alt="First ten lag plots for road link ID 2344" width="672" />
+<img src="Images/acf2-1.png" alt="First ten lag plots for road link ID 2344" width="672" />
 <p class="caption">
 Figure 2.13: First ten lag plots for road link ID 2344
 </p>
